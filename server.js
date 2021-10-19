@@ -16,7 +16,7 @@ const cors = require('cors')
 const movieRouter = require('./routes/recipe-router')
 
 const app = express()
-const apiPort = 3000
+const apiPort = process.env.PORT || 8080
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
