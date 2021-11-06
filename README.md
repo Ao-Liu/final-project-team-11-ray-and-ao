@@ -1,25 +1,15 @@
-# Recipe Run
-        
-## Project Description
-This web application is designed for all cooking enthusiasts or speedrun lovers and is expected to spread quickly among their circle of friends. The users of this app may be those who cook for fun, entertainment, or competition, or those who merely want something to decide for them what to eat. When the app is ready for commercial operation, we will hold an official recipe run contest, which will offer a cash price to the winner of each run.
+# Memories
 
-## Project Setup
-  - Frontend: React (frontend framework) + AntDesign (React UI library)
-  - Backend: Express + Node
-  - Database: MongoDB
-  - API required: The Meal DB https://www.themealdb.com/api.php 
+![Memories](https://i.ibb.co/7CmVbCW/image.png)
 
-### Cloning and Installing Dependencies
+## Introduction
+This is a code repository for the corresponding video tutorial - https://youtube.com/playlist?list=PL6QREj8te1P7VSwhrMf3D3Xt4V6_SRkhu.
 
-<TODO: Fill this in.  See the Lab 3 README for inspiration>
+Using React, Node.js, Express & MongoDB you'll learn how to build a Full Stack MERN Application - from start to finish. The App is called "Memories" and it is a simple social media app that allows users to post interesting events that happened in their lives.
 
-### Running Tests
+By the end of this video, you will have a strong understanding of how the MERN Stack works.
 
-<TODO: Fill this in.  See the Lab 3 README for inspiration>
+Setup:
+- run ```npm i && npm start``` for both client and server side to start the app
 
-### Running Locally
-
-<TODO: Fill this in.  See the Lab 3 README for inspiration>
-
-## Deploying
-https://recipe-run.herokuapp.com/
+TODO: rename post message, refactor reducers, add some cool memories, maybe clickable tags, fix update functionality
