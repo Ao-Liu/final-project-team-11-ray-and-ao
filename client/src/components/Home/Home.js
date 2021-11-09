@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Container, Grow, Grid, AppBar, TextField, Button, Paper } from '@material-ui/core';
+import { Toolbar, Typography, Container, Grow, Grid, AppBar, TextField, Button, Paper } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
+import medal from '../../images/medal.png';
 
 import { getPostsBySearch } from '../../actions/posts';
 import Posts from '../Posts/Posts';
@@ -48,30 +49,26 @@ const Home = () => {
   return (
     <Grow in>
       <Container maxWidth="xl">
-        <Grid container justify="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
-          <Grid item xs={12} sm={6} md={9}>
-            <Posts setCurrentId={setCurrentId} />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppBar className={classes.appBarSearch} position="static" color="inherit">
-              <TextField onKeyDown={handleKeyPress} name="search" variant="outlined" label="Search Memories" fullWidth value={search} onChange={(e) => setSearch(e.target.value)} />
-              <ChipInput
-                style={{ margin: '10px 0' }}
-                value={tags}
-                onAdd={(chip) => handleAddChip(chip)}
-                onDelete={(chip) => handleDeleteChip(chip)}
-                label="Search Tags"
-                variant="outlined"
-              />
-              <Button onClick={searchPost} className={classes.searchButton} variant="contained" color="primary">Search</Button>
-            </AppBar>
-            <Form currentId={currentId} setCurrentId={setCurrentId} />
-            {(!searchQuery && !tags.length) && (
-              <Paper className={classes.pagination} elevation={6}>
-                <Pagination page={page} />
-              </Paper>
-            )}
-          </Grid>
+        <Grid container justify="flex-start" alignItems="stretch" spacing={3} className={classes.gridContainer}>
+          <img className={classes.image} src={medal} alt="icon" height="330px" />
+          <Paper className={classes.holder}  style={{ marginLeft:'80px', height:'18em', width:'53em', padding: '20px', borderRadius: '15px', backgroundColor:'#FEF7CE',}} elevation={0}>
+            <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h3" component="h2">Recipe Run #123 in</Typography>
+            <Typography style={{ fontWeight: 600, textAlign:'center', marginTop: '30px'}} variant="h1" component="h2">23h 49m 26s</Typography>
+            <Grid style={{ marginTop: '30px', textAlign:'center' }}>
+              <Button variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#82B36F' }}>Register Now</Button>
+              <Button variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#FFF', color: '#000', marginLeft:'30px' }}>FAQ</Button> 
+            </Grid>
+          </Paper>
+        </Grid>
+        <Grid container justify="flex-start" alignItems="stretch" spacing={3} style={{marginTop: '35px'}}>
+          <Paper className={classes.holder} style={{ height:'13em', width:'37em', padding: '20px', borderRadius: '15px', backgroundColor:'#EFEEFE',}} elevation={0}>
+            <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">Recipe Run #122 review</Typography>
+            <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '30px', marginLeft:'20px'}} variant="h2" component="h2">Bacon</Typography>
+          </Paper>
+          <Paper className={classes.holder} style={{ marginLeft:'30px', height:'13em', width:'37em', padding: '20px', borderRadius: '15px', backgroundColor:'#FAE4EC',}} elevation={0}>
+            <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">Recipe Run #121 review</Typography>
+            <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '25px', marginLeft:'20px'}} variant="h2" component="h4">Taco</Typography>
+          </Paper>
         </Grid>
       </Container>
     </Grow>

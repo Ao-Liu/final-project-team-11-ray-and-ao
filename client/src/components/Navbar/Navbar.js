@@ -4,8 +4,6 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 
-import memoriesLogo from '../../images/memoriesLogo.png';
-import memoriesText from '../../images/memoriesText.png';
 import recipeRun from '../../images/recipeRun.png';
 import * as actionType from '../../constants/actionTypes';
 import useStyles from './styles';
@@ -55,12 +53,12 @@ const Navbar = () => {
       <Toolbar className={classes.toolbar}>
         {user?.result ? (
           <div className={classes.profile}>
-            <Avatar className={classes.purple} alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.name.charAt(0)}</Avatar>
-            <Typography className={classes.userName} variant="h6">{user?.result.name}</Typography>
-            <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button>
+            {/* <Avatar className={classes.purple} alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.name.charAt(0)}</Avatar> */}
+            <Typography className={classes.userName} variant="h6">Hi, {user?.result.name}!</Typography>
+            <Button variant="contained" className={classes.logout} color="primary" onClick={logout} disableElevation style={{ backgroundColor: '#E1315A'}}>Logout</Button>
           </div>
         ) : (
-            <Button className={classes.login} component={Link} to="/auth" variant="contained" disableElevation style={{ backgroundColor: '#203954' }}>Sign In</Button>
+            <Button className={classes.login} component={Link} to="/auth" variant="contained" disableElevation style={{ backgroundColor: '#203954'}}>Sign In</Button>
         )}
       </Toolbar>
     </AppBar>
