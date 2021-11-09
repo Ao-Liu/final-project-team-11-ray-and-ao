@@ -6,6 +6,7 @@ import decode from 'jwt-decode';
 
 import memoriesLogo from '../../images/memoriesLogo.png';
 import memoriesText from '../../images/memoriesText.png';
+import recipeRun from '../../images/recipeRun.png';
 import * as actionType from '../../constants/actionTypes';
 import useStyles from './styles';
 
@@ -24,6 +25,10 @@ const Navbar = () => {
     setUser(null);
   };
 
+  const navProfile = () => {
+    
+  }
+
   useEffect(() => {
     const token = user?.token;
 
@@ -37,11 +42,18 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <AppBar className={classes.appBar} position="static" color="inherit">
+    <AppBar className={classes.appBar} elevation={0} position="static" color="inherit">
       <Link to="/" className={classes.brandContainer}>
-        <img component={Link} to="/" src={memoriesText} alt="icon" height="45px" />
-        <img className={classes.image} src={memoriesLogo} alt="icon" height="40px" />
+        <img component={Link} to="/" src={recipeRun} alt="icon" height="45px" />
+        {/* <img className={classes.image} src={memoriesLogo} alt="icon" height="40px" /> */}
       </Link>
+      <Toolbar className={classes.btnGrp}>
+        <Link to="/" style={{textDecoration: 'none'}}>
+          <Button variant="text" className={classes.touchBarBtn} color="primary" onClick={navProfile}>Home</Button>
+        </Link>
+        <Button variant="text" className={classes.touchBarBtn} color="primary" onClick={navProfile}>Profile</Button>
+        <Button variant="text" className={classes.touchBarBtn} color="primary" onClick={navProfile}>Pro</Button> 
+      </Toolbar>
       <Toolbar className={classes.toolbar}>
         {user?.result ? (
           <div className={classes.profile}>
