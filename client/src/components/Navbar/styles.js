@@ -46,6 +46,11 @@ export default makeStyles((theme) => ({
   logout: {
     marginLeft: '20px',
   },
+  login: {
+    marginLeft: '20px',
+    background: '#203954',
+    color: '#FFF'
+  },
   btnGrp: {
     display: 'flex',
     justifyContent: 'flex-end',
@@ -56,6 +61,8 @@ export default makeStyles((theme) => ({
   },
   touchBarBtn: {
     marginLeft: '60px',
+    fontSize: '18px',
+    color: '#203954'
   },
   userName: {
     display: 'flex',

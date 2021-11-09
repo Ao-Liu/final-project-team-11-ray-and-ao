@@ -48,11 +48,9 @@ const Navbar = () => {
         {/* <img className={classes.image} src={memoriesLogo} alt="icon" height="40px" /> */}
       </Link>
       <Toolbar className={classes.btnGrp}>
-        <Link to="/" style={{textDecoration: 'none'}}>
-          <Button variant="text" className={classes.touchBarBtn} color="primary" onClick={navProfile}>Home</Button>
-        </Link>
-        <Button variant="text" className={classes.touchBarBtn} color="primary" onClick={navProfile}>Profile</Button>
-        <Button variant="text" className={classes.touchBarBtn} color="primary" onClick={navProfile}>Pro</Button> 
+        <Button size="large" variant="text" component={Link} to="/" className={classes.touchBarBtn} color="primary" style={{ backgroundColor: 'transparent' }} >Home</Button>
+        <Button variant="text" size="large" className={classes.touchBarBtn} color="primary" onClick={navProfile} style={{ backgroundColor: 'transparent' }} >Profile</Button>
+        <Button variant="text" size="large" className={classes.touchBarBtn} color="primary" onClick={navProfile} style={{ backgroundColor: 'transparent' }}  >Pro</Button> 
       </Toolbar>
       <Toolbar className={classes.toolbar}>
         {user?.result ? (
@@ -62,7 +60,7 @@ const Navbar = () => {
             <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button>
           </div>
         ) : (
-          <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
+            <Button className={classes.login} component={Link} to="/auth" variant="contained" disableElevation style={{ backgroundColor: '#203954' }}>Sign In</Button>
         )}
       </Toolbar>
     </AppBar>
