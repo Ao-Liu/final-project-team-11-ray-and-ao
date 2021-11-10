@@ -55,7 +55,7 @@ const Profile = () => {
       <Grid container direction="row" spacing={4} justifyContent="center" alignItems="center">
         <Grid item sm={12} md={5} justifyContent="center" alignItems="center">
           <Paper style={{ padding: '72px', borderRadius: '15px', backgroundColor:'#FEF7CE', height: '70vh'}} elevation={0}>
-            <Avatar alt="Avatar" src={userAvatar} style={{left:"22%",height: "15em", width: "15em"}}/>
+            <Avatar alt="Avatar" src={userAvatar} style={{left:"22%", height: "15em", width: "15em"}}/>
             <Typography style={{ fontWeight: 600, textAlign:'center', marginTop: '50px'}} variant="h3" component="h2">Ray Fang</Typography>
             <Typography style={{ fontWeight: 400, textAlign:'center', marginTop: '30px'}} variant="h5" component="h4">fangrui200614@gmail.com</Typography>
             <Typography style={{ fontWeight: 400, textAlign:'center', marginTop: '50px'}} variant="h5" component="h3">Hello Guys! I'm from Shanghai China and I really enjoy cooking. Hope to make friends with you all!</Typography>

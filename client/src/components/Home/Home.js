@@ -63,13 +63,13 @@ const Home = () => {
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.holder} style={{ padding: '50px', borderRadius: '15px', backgroundColor:'#EFEEFE',}} elevation={0}>
+          <Paper className={classes.holder} style={{ padding: '50px', borderRadius: '15px', height:"25vh", backgroundColor:'#EFEEFE',}} elevation={0}>
               <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">Recipe Run #122 review</Typography>
               <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '30px', marginLeft:'20px'}} variant="h2" component="h2">Bacon</Typography>
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.holder} style={{padding: '50px', borderRadius: '15px', backgroundColor:'#FAE4EC',}} elevation={0}>
+          <Paper className={classes.holder} style={{padding: '50px', borderRadius: '15px', height:"25vh", backgroundColor:'#FAE4EC',}} elevation={0}>
               <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">Recipe Run #121 review</Typography>
               <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '25px', marginLeft:'20px'}} variant="h2" component="h4">Taco</Typography>
             </Paper>
