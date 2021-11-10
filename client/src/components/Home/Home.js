@@ -48,10 +48,12 @@ const Home = () => {
 
   return (
     <Grow in>
-      <Container maxWidth="xl">
-        <Grid container justify="flex-start" alignItems="stretch" spacing={3} className={classes.gridContainer}>
-          <img className={classes.image} src={medal} alt="icon" height="330px" />
-          <Paper className={classes.holder}  style={{ marginLeft:'80px', height:'18em', width:'53em', padding: '20px', borderRadius: '15px', backgroundColor:'#FEF7CE',}} elevation={0}>
+      <Grid container spacing={4} justifyContent="center" alignItems="center">
+        <Grid item xs={12} md={3}>
+          <img src={medal} height="350em"/>
+        </Grid>
+        <Grid item xs={12} md={9}>
+          <Paper className={classes.holder}  style={{ padding: '72px', borderRadius: '15px', backgroundColor:'#FEF7CE'}} elevation={0}>
             <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h3" component="h2">Recipe Run #123 in</Typography>
             <Typography style={{ fontWeight: 600, textAlign:'center', marginTop: '30px'}} variant="h1" component="h2">23h 49m 26s</Typography>
             <Grid style={{ marginTop: '30px', textAlign:'center' }}>
@@ -60,17 +62,19 @@ const Home = () => {
             </Grid>
           </Paper>
         </Grid>
-        <Grid container justify="flex-start" alignItems="stretch" spacing={3} style={{marginTop: '35px'}}>
-          <Paper className={classes.holder} style={{ height:'13em', width:'37em', padding: '20px', borderRadius: '15px', backgroundColor:'#EFEEFE',}} elevation={0}>
-            <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">Recipe Run #122 review</Typography>
-            <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '30px', marginLeft:'20px'}} variant="h2" component="h2">Bacon</Typography>
-          </Paper>
-          <Paper className={classes.holder} style={{ marginLeft:'30px', height:'13em', width:'37em', padding: '20px', borderRadius: '15px', backgroundColor:'#FAE4EC',}} elevation={0}>
-            <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">Recipe Run #121 review</Typography>
-            <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '25px', marginLeft:'20px'}} variant="h2" component="h4">Taco</Typography>
+        <Grid item xs={6}>
+          <Paper className={classes.holder} style={{ padding: '50px', borderRadius: '15px', backgroundColor:'#EFEEFE',}} elevation={0}>
+              <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">Recipe Run #122 review</Typography>
+              <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '30px', marginLeft:'20px'}} variant="h2" component="h2">Bacon</Typography>
           </Paper>
         </Grid>
-      </Container>
+        <Grid item xs={6}>
+          <Paper className={classes.holder} style={{padding: '50px', borderRadius: '15px', backgroundColor:'#FAE4EC',}} elevation={0}>
+              <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">Recipe Run #121 review</Typography>
+              <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '25px', marginLeft:'20px'}} variant="h2" component="h4">Taco</Typography>
+            </Paper>
+        </Grid>
+      </Grid>
     </Grow>
   );
 };
