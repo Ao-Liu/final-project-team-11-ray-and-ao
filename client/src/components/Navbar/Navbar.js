@@ -49,7 +49,6 @@ const Navbar = () => {
         <Button size="large" variant="text" component={Link} to="/" className={classes.touchBarBtn} color="primary" style={{ backgroundColor: 'transparent' }} >Home</Button>
         <Button variant="text" size="large" component={Link} to="/profile" className={classes.touchBarBtn} color="primary" onClick={navProfile} style={{ backgroundColor: 'transparent' }} >Profile</Button>
         <Button variant="text" size="large" component={Link} to="/pro" className={classes.touchBarBtn} color="primary" onClick={navProfile} style={{ backgroundColor: 'transparent' }}  >Pro</Button> 
-        <Button variant="text" size="large" component={Link} to="/contest" className={classes.touchBarBtn} color="primary" onClick={navProfile} style={{ backgroundColor: 'transparent' }}  >Contest</Button> 
       </Toolbar>
       <Toolbar className={classes.toolbar}>
         {user?.result ? (
