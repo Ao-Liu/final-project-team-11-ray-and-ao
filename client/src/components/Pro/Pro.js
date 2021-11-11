@@ -50,14 +50,14 @@ const Profile = () => {
       <Grid container direction="row" spacing={8} justifyContent="center" alignItems="center">
         <Grid item sm={12} md={6} justifyContent="center" alignItems="center">
           <Paper style={{ padding: '72px', borderRadius: '15px', backgroundColor:'#FEF7CE', height: '70vh'}} elevation={0}>
-            <Typography style={{ fontWeight: 600,  fontSize: "120px",textAlign:'center'}} variant="h2" component="h2">Free</Typography>
+            <Typography style={{ fontWeight: 600,  fontSize: "96px",textAlign:'center'}} variant="h2" component="h2">Free</Typography>
             <Grid container >
               <Grid item md={2}/>
               <Grid item >
                 <Typography style={{ fontWeight: 600, fontSize: "160px", textAlign:'center', marginTop: '30px'}} variant="h1" component="h4">0$</Typography>
               </Grid>
               <Grid item>
-                <Typography style={{ fontWeight: 500, textAlign:'center', marginTop: '30px'}} variant="h1" component="h4">/month</Typography>
+                <Typography style={{ fontWeight: 500, textAlign:'center', marginTop: '60px'}} variant="h1" component="h4">/month</Typography>
               </Grid>
               <Grid item md={5}/>
             </Grid>
@@ -77,14 +77,14 @@ const Profile = () => {
         </Grid>
         <Grid item sm={12} md={6}>
           <Paper style={{ padding: '72px', borderRadius: '15px', backgroundColor:'#E7FFD4', height: '70vh'}} elevation={0}>
-          <Typography style={{ fontWeight: 600,  fontSize: "120px",textAlign:'center'}} variant="h2" component="h2">Pro</Typography>
+          <Typography style={{ fontWeight: 600,  fontSize: "96px",textAlign:'center'}} variant="h2" component="h2">Pro</Typography>
             <Grid container >
               <Grid item md={2}/>
               <Grid item >
                 <Typography style={{ fontWeight: 600, fontSize: "160px", textAlign:'center', marginTop: '30px'}} variant="h1" component="h4">5$</Typography>
               </Grid>
               <Grid item>
-                <Typography style={{ fontWeight: 500, textAlign:'center', marginTop: '30px'}} variant="h1" component="h4">/month</Typography>
+                <Typography style={{ fontWeight: 500, textAlign:'center', marginTop: '60px'}} variant="h1" component="h4">/month</Typography>
               </Grid>
               <Grid item md={5}/>
             </Grid>

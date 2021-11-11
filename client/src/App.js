@@ -9,6 +9,7 @@ import Pro from './components/Pro/Pro'
 import Profile from './components/Profile/Profile';
 import Auth from './components/Auth/Auth';
 import CreatorOrTag from './components/CreatorOrTag/CreatorOrTag';
+import Contest from './components/Contest/Contest'
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/" exact component={() => <Redirect to="/home" />} />
           <Route path="/home" exact component={Home} />
           <Route path="/home/search" exact component={Home} />
+          <Route path="/contest" exact component={Contest} />
           <Route path="/pro" exact component={Pro} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/posts/:id" exact component={PostDetails} />
