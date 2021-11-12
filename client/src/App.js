@@ -9,7 +9,9 @@ import Pro from './components/Pro/Pro'
 import Profile from './components/Profile/Profile';
 import Auth from './components/Auth/Auth';
 import CreatorOrTag from './components/CreatorOrTag/CreatorOrTag';
-import Contest from './components/Contest/Contest'
+import Contest from './components/Contest/Contest';
+import Submission from './components/Submission/Submission.js';
+import Submissions from './components/Submission/Submissions.js';
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
@@ -26,6 +28,7 @@ const App = () => {
           <Route path="/pro" exact component={Pro} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/posts/:id" exact component={PostDetails} />
+          <Route path="/submission" exact component={Submission} />
           <Route path={['/creators/:name', '/tags/:name']} component={CreatorOrTag} />
           <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/home" />)} />
         </Switch>

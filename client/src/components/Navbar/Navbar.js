@@ -45,11 +45,12 @@ const Navbar = () => {
         <img component={Link} to="/" src={recipeRun} alt="icon" height="45px" />
         {/* <img className={classes.image} src={memoriesLogo} alt="icon" height="40px" /> */}
       </Link>
+      {user?.token ? 
       <Toolbar className={classes.btnGrp}>
         <Button size="large" variant="text" component={Link} to="/" className={classes.touchBarBtn} color="primary" style={{ backgroundColor: 'transparent' }} >Home</Button>
         <Button variant="text" size="large" component={Link} to="/profile" className={classes.touchBarBtn} color="primary" onClick={navProfile} style={{ backgroundColor: 'transparent' }} >Profile</Button>
         <Button variant="text" size="large" component={Link} to="/pro" className={classes.touchBarBtn} color="primary" onClick={navProfile} style={{ backgroundColor: 'transparent' }}  >Pro</Button> 
-      </Toolbar>
+      </Toolbar>  : <Toolbar className={classes.btnGrp}/>}
       <Toolbar className={classes.toolbar}>
         {user?.result ? (
           <div className={classes.profile}>

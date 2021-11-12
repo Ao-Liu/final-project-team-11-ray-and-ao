@@ -57,8 +57,8 @@ const SignUp = () => {
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   return (
-    <Container component="main" maxWidth="md">
-      <Paper style={{ borderRadius: '15px', backgroundColor:'#E7FFD4'}} className={classes.paper} elevation={4}>
+    <Container component="main" maxWidth="sm">
+      <Paper style={{ padding:"60px", borderRadius: '15px', backgroundColor:'#E7FFD4'}} className={classes.paper} elevation={0}>
         <Typography style={{fontWeight: 600, marginBottom:"20px"}} component="h1" variant="h3">{ isSignup ? 'Sign up' : 'Sign in' }</Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
