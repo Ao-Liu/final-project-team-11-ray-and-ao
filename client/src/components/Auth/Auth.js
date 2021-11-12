@@ -57,12 +57,9 @@ const SignUp = () => {
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Paper className={classes.paper} elevation={6}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">{ isSignup ? 'Sign up' : 'Sign in' }</Typography>
+    <Container component="main" maxWidth="md">
+      <Paper style={{ borderRadius: '15px', backgroundColor:'#E7FFD4'}} className={classes.paper} elevation={4}>
+        <Typography style={{fontWeight: 600, marginBottom:"20px"}} component="h1" variant="h3">{ isSignup ? 'Sign up' : 'Sign in' }</Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             { isSignup && (
@@ -75,13 +72,13 @@ const SignUp = () => {
             <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
             { isSignup && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" /> }
           </Grid>
-          <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+          <Button type="submit" fullWidth variant="contained" style={{fontSize:"18px", color: "#fff", backgroundColor:"#74B666", marginTop:"40px"}} className={classes.submit}>
             { isSignup ? 'Sign Up' : 'Sign In' }
           </Button>
           <GoogleLogin
             clientId="564033717568-bu2nr1l9h31bhk9bff4pqbenvvoju3oq.apps.googleusercontent.com"
             render={(renderProps) => (
-              <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
+              <Button className={classes.googleButton} style={{fontSize:"18px", color: "#fff", backgroundColor:"#74B666", marginTop:"10px"}} fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
                 Google Sign In
               </Button>
             )}
@@ -89,9 +86,9 @@ const SignUp = () => {
             onFailure={googleError}
             cookiePolicy="single_host_origin"
           />
-          <Grid container justify="flex-end">
+          <Grid containerjustify="flex-end">
             <Grid item>
-              <Button onClick={switchMode}>
+              <Button style={{fontSize:"16px", marginTop:"40px"}} onClick={switchMode}>
                 { isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign Up" }
               </Button>
             </Grid>

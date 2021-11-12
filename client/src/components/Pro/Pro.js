@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 import userAvatar from '../../images/user.png';
-
+import { Check } from '@material-ui/icons';
 import { getPostsBySearch } from '../../actions/posts';
 import Form from '../Form/Form';
 import Pagination from '../Pagination';
@@ -63,13 +63,34 @@ const Profile = () => {
             </Grid>
             <Grid container >
               <Grid item md={12}>
-                <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">Sign up for official contests</Typography>
+                <Grid container>
+                  <Grid item md={1}>
+                    <Check style={{ marginLeft:"140px", marginTop: '30px'}}/>
+                  </Grid>
+                  <Grid item md={11}>
+                    <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">Sign up for official contests</Typography>
+                  </Grid>
+                </Grid>
               </Grid>
               <Grid item md={12}>
-                <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">Claim Prizes</Typography>
+                <Grid container>
+                  <Grid item md={1}>
+                    <Check style={{ marginLeft:"140px", marginTop: '30px'}}/>
+                  </Grid>
+                  <Grid item md={11}>
+                    <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">Claim Prizes</Typography>
+                  </Grid>
+                </Grid>
               </Grid>
               <Grid item md={12}>
-                <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">View hundred thousands of recipes</Typography>
+                <Grid container>
+                  <Grid item md={1}>
+                    <Check style={{ marginLeft:"140px", marginTop: '30px'}}/>
+                  </Grid>
+                  <Grid item md={11}>
+                    <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">View 50,000+ recipes</Typography>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
             <Button variant="contained" color="primary" disableElevation style={{ marginTop: '60px', left: "32%",fontSize:"40px", height: '3em', width:"7em",backgroundColor: '#173A56' }}>Subscribed</Button>
@@ -88,15 +109,36 @@ const Profile = () => {
               </Grid>
               <Grid item md={5}/>
             </Grid>
-            <Grid container >
+            <Grid container>
               <Grid item md={12}>
-                <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">Make your personal contests</Typography>
+                <Grid container>
+                  <Grid item md={1}>
+                    <Check style={{ marginLeft:"140px", marginTop: '30px'}}/>
+                  </Grid>
+                  <Grid item md={11}>
+                    <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">Make your personal contests</Typography>
+                  </Grid>
+                </Grid>
               </Grid>
               <Grid item md={12}>
-                <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">Customized rules</Typography>
+                <Grid container>
+                  <Grid item md={1}>
+                    <Check style={{ marginLeft:"140px", marginTop: '30px'}}/>
+                  </Grid>
+                  <Grid item md={11}>
+                    <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">Customized rules</Typography>
+                  </Grid>
+                </Grid>
               </Grid>
               <Grid item md={12}>
-                <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">Help us improve!</Typography>
+                <Grid container>
+                  <Grid item md={1}>
+                    <Check style={{ marginLeft:"140px", marginTop: '30px'}}/>
+                  </Grid>
+                  <Grid item md={11}>
+                    <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">Help us improve!</Typography>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
             <Button variant="contained" color="primary" disableElevation style={{ marginTop: '60px', left: "32%",fontSize:"40px", height: '3em', width:"7em",backgroundColor: '#74B666' }}>Upgrade</Button>
