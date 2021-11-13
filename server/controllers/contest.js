@@ -4,6 +4,7 @@ import endOfDay from 'date-fns/endOfDay/index.js'
 import startOfDay from 'date-fns/startOfDay/index.js'
 
 import Contest from '../models/contest.js';
+import Recipe from '../models/recipe.js';
 
 const router = express.Router();
 
@@ -19,6 +20,26 @@ export const getContest = async (req, res) => {
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
+}
+
+export const getRecentContests = async (req, res) => {
+    try {
+        const LIMIT = 3;
+        const contests = await Contest.find().sort({ startDate:-1 }).limit(LIMIT);
+        res.status(200).json(contests);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
+export const getRecipe = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const recipe = await Recipe.findById(id);
+        res.status(200).json(recipe);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    } 
 }
 
 export default router;

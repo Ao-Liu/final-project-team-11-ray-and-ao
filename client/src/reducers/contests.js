@@ -1,4 +1,4 @@
-import { FETCH_ALL, FETCH_CONTEST, FETCH_BY_SEARCH, FETCH_BY_CREATOR, FETCH_POST, CREATE, UPDATE, DELETE, LIKE, COMMENT } from '../constants/actionTypes';
+import { FETCH_CONTEST, CREATE, UPDATE, DELETE, FETCH_RECENT_CONTEST, FETCH_RECIPE } from '../constants/actionTypes';
 
 export default (state = { isLoading: true, contests: [] }, action) => {
   switch (action.type) {
@@ -8,6 +8,10 @@ export default (state = { isLoading: true, contests: [] }, action) => {
       return { ...state, isLoading: false };
     case FETCH_CONTEST:
       return { ...state, contests: action.payload.contest };
+    case FETCH_RECENT_CONTEST:
+      return { ...state, contests: action.payload.contest };
+    case FETCH_RECIPE:
+      return { ...state, recipe: action.payload.recipe };
     case CREATE:
       return { ...state, contests: [...state.contests, action.payload] };
     case UPDATE:
