@@ -22,7 +22,7 @@ const Pro = () => {
   const searchQuery = query.get('searchQuery');
 
   const [currentId, setCurrentId] = useState(0);
-  const tmp = user?.result?.isPro === "true" ? true : false
+  let tmp = user?.result?.isPro === "true" ? true : false
   const [isPro, setIsPro] = useState(tmp)
   console.log(JSON.stringify(user.result));
   const dispatch = useDispatch();
@@ -32,7 +32,9 @@ const Pro = () => {
   const history = useHistory();
 
   const handleSubscribe = () => {
-    user.result.isPro = true;
+    user.result.isPro = "true";
+    setIsPro(true)
+    localStorage.setItem('profile', JSON.stringify(user));
     console.log(JSON.stringify(user.result));
     dispatch(subscribePro(user.result));
   }
@@ -89,7 +91,7 @@ const Pro = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Button variant="contained" color="primary" disabled={true} disableElevation style={{ marginTop: '60px', left: "32%",fontSize:"40px", height: '3em', width:"7em",backgroundColor: '#173A56' }}>Subscribed</Button>
+            <Button variant="contained" color="primary" disabled={true} disableElevation style={{ marginTop: '60px', left: "32%",fontSize:"40px", height: '3em', width:"7em", backgroundColor: '#173A56', color: '#FFF' }}>Subscribed</Button>
           </Paper>
         </Grid>
         <Grid item sm={12} md={6}>
@@ -137,7 +139,7 @@ const Pro = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Button variant="contained" color="primary" onClick={handleSubscribe} disabled={isPro} disableElevation style={{ marginTop: '60px', left: "32%",fontSize:"40px", height: '3em', width:"7em",backgroundColor: '#74B666' }}>{isPro ? "Subscribed" : "Upgrade"}</Button>
+            <Button variant="contained" color="primary" onClick={handleSubscribe} disabled={isPro} disableElevation style={{ marginTop: '60px', left: "32%",fontSize:"40px", height: '3em', width:"7em",backgroundColor: '#74B666',  color: '#FFF' }}>{isPro ? "Subscribed" : "Upgrade"}</Button>
           </Paper>
         </Grid>
       </Grid>
