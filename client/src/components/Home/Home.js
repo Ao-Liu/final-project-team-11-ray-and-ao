@@ -21,19 +21,19 @@ const Home = () => {
   const page = query.get('page') || 1;
   const searchQuery = query.get('searchQuery');
   const {contests, isLoading} = useSelector((state) => state.contests);
-  const [startDate, setStartDate] = useState("");
-  // const { posts, isLoading } = useSelector((state) => state.posts);
-
+  const [startDate, setStartDate] = useState([]);
   const [currentId, setCurrentId] = useState(0);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getContest());
-    setInterval(handleUpdateTime, 1000);
-  }, []);
-
+  const [started, setStarted] = useState(false);
   const [search, setSearch] = useState('');
   const [tags, setTags] = useState([]);
   const history = useHistory();
+  // const { posts, isLoading } = useSelector((state) => state.posts);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getContest());
+  }, []);
+
 
   const searchPost = () => {
     if (search.trim() || tags) {
@@ -51,10 +51,11 @@ const Home = () => {
   };
 
   const handleUpdateTime = () => {
-    // console.log(`------------${JSON.stringify(contests[0].number)}`);
-    // console.log(`------------${JSON.stringify(mssecondsToTime(new Date(contests[0].startDate) - new Date()))}`);
-    // setStartDate(new Date());
-    // setStartDate(JSON.stringify(mssecondsToTime(new Date(contests[0].startDate) - new Date())))
+    let ms = new Date(contests[0].startDate) - new Date();
+    if (ms < 0) {
+      setStarted(true);
+    }
+    setStartDate(mssecondsToTime(ms));
   }
 
   const mssecondsToTime = (secs) => {
@@ -78,11 +79,6 @@ const Home = () => {
   const updateContestInfo = () => {
     console.log(`------------${JSON.stringify(contests[0].number)}`);
     console.log(`------------${JSON.stringify(mssecondsToTime(new Date(contests[0].startDate) - new Date()))}`);
-    // console.log(`------------${}`);
-    // console.log(`------------${JSON.parse(contests[0]).startDate}`);
-    // console.log(`------------${JSON.stringify(contests)}`);
-    
-    // console.log(startDate);
     history.push(`/home/`);
   }
 
@@ -99,11 +95,12 @@ const Home = () => {
         <Grid item xs={12} md={9}>
           <Paper className={classes.holder}  style={{ padding: '72px', borderRadius: '15px', backgroundColor:'#FEF7CE'}} elevation={0}>
             <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h3" component="h2">{contests[0].name} #{contests[0].number} in</Typography>
-            <Typography style={{ fontWeight: 600, textAlign:'center', marginTop: '30px'}} variant="h1" component="h2">{startDate}</Typography>
+            <div style={{display:'none'}}>{setInterval(handleUpdateTime, 1000)}</div>
+            <Typography style={{ fontWeight: 600, textAlign:'center', marginTop: '30px'}} variant="h1" component="h2">{startDate.h}h {startDate.m}m {startDate.s}s</Typography>
             <Grid style={{ marginTop: '30px', textAlign:'center' }}>
-              <Button variant="contained" size="large" color="primary" 
+              {started ? <Button variant="contained" size="large" color="primary" 
               onClick={updateContestInfo} 
-              disableElevation style={{ backgroundColor: '#82B36F' }}>Register Now</Button>
+              disableElevation style={{ backgroundColor: '#82B36F' }}>Register Now</Button> : null}
               <Button variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#FFF', color: '#000', marginLeft:'30px' }}>FAQ</Button> 
             </Grid>
           </Paper>

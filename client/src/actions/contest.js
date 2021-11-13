@@ -4,11 +4,17 @@ import * as api from '../api/index.js';
 export const getContest = () => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
-
     const { data } = await api.fetchContest();
-
     dispatch({ type: FETCH_CONTEST, payload: { contest: data } });
     dispatch({ type: END_LOADING });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getTime = () => async (dispatch) => {
+  try {
+
   } catch (error) {
     console.log(error);
   }
