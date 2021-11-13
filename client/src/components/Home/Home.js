@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Toolbar, Typography, Container, Grow, Grid, AppBar, TextField, Button, Paper, CircularProgress } from '@material-ui/core';
+import { Toolbar, Typography, Container, Grow, Grid, AppBar, TextField, Button, Paper, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
@@ -26,6 +26,7 @@ const Home = () => {
   const [started, setStarted] = useState(false);
   const [search, setSearch] = useState('');
   const [tags, setTags] = useState([]);
+  const [rulesOpen, setRulesOpen] = React.useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -80,6 +81,14 @@ const Home = () => {
     history.push(`/home/`);
   }
 
+  const handleClickViewRules = () => {
+    setRulesOpen(true);
+  }
+
+  const handleCloseViewRules = () => {
+    setRulesOpen(false);
+  }
+
   const handleAddChip = (tag) => setTags([...tags, tag]);
 
   const handleDeleteChip = (chipToDelete) => setTags(tags.filter((tag) => tag !== chipToDelete));
@@ -91,6 +100,26 @@ const Home = () => {
   return (
     isLoading ? <CircularProgress /> : <Grow in>
       <Grid container spacing={4} justifyContent="center" alignItems="center">
+        <Dialog
+          open={rulesOpen}
+          onClose={handleCloseViewRules}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Rules"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Contest Organizer: {contests[2].creator} <br/><br/>
+              Rules: {contests[2].rules} <br/><br/>
+              Prize: {contests[2].prize.map((p) => `${p } `)}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseViewRules} autoFocus> Close </Button>
+          </DialogActions>
+        </Dialog>
         <Grid item xs={12} md={3}>
           <img src={medal} height="350em"/>
         </Grid>
@@ -106,7 +135,7 @@ const Home = () => {
               <Button variant="contained" size="large" color="primary" 
               onClick={updateContestInfo} 
               disableElevation style={{ backgroundColor: '#82B36F' }}>Preview</Button>}
-              <Button variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#FFF', color: '#000', marginLeft:'30px' }}>FAQ</Button> 
+              <Button variant="contained" size="large" color="primary" disableElevation onClick={handleClickViewRules} style={{ backgroundColor: '#FFF', color: '#000', marginLeft:'30px' }}>View Rules</Button> 
             </Grid>
           </Paper>
         </Grid>
