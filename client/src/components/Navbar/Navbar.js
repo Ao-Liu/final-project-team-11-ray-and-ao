@@ -43,7 +43,6 @@ const Navbar = () => {
     <AppBar className={classes.appBar} elevation={0} position="static" color="inherit">
       <Link to="/" className={classes.brandContainer}>
         <img component={Link} to="/" src={recipeRun} alt="icon" height="45px" />
-        {/* <img className={classes.image} src={memoriesLogo} alt="icon" height="40px" /> */}
       </Link>
       {user?.token ? 
       <Toolbar className={classes.btnGrp}>

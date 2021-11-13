@@ -1,22 +1,17 @@
 import mongoose from 'mongoose';
 
 const contestSchema = mongoose.Schema({
-    title: String,
+    name: String,
     number: String,// contest #
+    creator: String,
     recipe: String,//stores ID
-    startAt: {
-        type: Date,
-        default: new Date(),
-    },
-    endAt: {
-        type: Date,
-        default: new Date(),
-    },
+    startDate: Date,
+    endDate: Date,
     submissions: [String],// stores IDs
-    prizes: [String], 
-    rule: String,
+    rules: String,
+    prize: [String], 
 })
 
-var ContestSchema = mongoose.model('Contest', contestSchema);
+var Contest = mongoose.model('Contest', contestSchema);
 
-export default ContestSchema;
+export default Contest;
