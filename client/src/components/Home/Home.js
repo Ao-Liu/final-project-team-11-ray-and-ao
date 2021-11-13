@@ -100,26 +100,28 @@ const Home = () => {
   return (
     isLoading ? <CircularProgress /> : <Grow in>
       <Grid container spacing={4} justifyContent="center" alignItems="center">
-        <Dialog
-          open={rulesOpen}
-          onClose={handleCloseViewRules}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">
-            {"Rules"}
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Contest Organizer: {contests[2].creator} <br/><br/>
-              Rules: {contests[2].rules} <br/><br/>
-              Prize: {contests[2].prize.map((p) => `${p } `)}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseViewRules} autoFocus> Close </Button>
-          </DialogActions>
-        </Dialog>
+        <Grid>
+          <Dialog
+            open={rulesOpen}
+            onClose={handleCloseViewRules}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              {"Rules"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Contest Organizer: {contests[2].creator} <br/><br/>
+                Rules: {contests[2].rules} <br/><br/>
+                Prize: {contests[2].prize.map((p) => `${p } `)}
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseViewRules} autoFocus> Close </Button>
+            </DialogActions>
+          </Dialog>
+        </Grid>
         <Grid item xs={12} md={3}>
           <img src={medal} height="350em"/>
         </Grid>
