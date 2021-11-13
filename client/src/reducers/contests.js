@@ -1,6 +1,6 @@
-import { FETCH_CONTEST, CREATE, UPDATE, DELETE, FETCH_RECENT_CONTEST, FETCH_RECIPE } from '../constants/actionTypes';
+import { FETCH_CONTEST, CREATE,FETCH_ONE_CONTEST, UPDATE, DELETE, FETCH_RECENT_CONTEST, FETCH_RECIPE } from '../constants/actionTypes';
 
-export default (state = { isLoading: true, contests: [] }, action) => {
+export default (state = { isLoading: true, contests: [], recipes: [] }, action) => {
   switch (action.type) {
     case 'START_LOADING':
       return { ...state, isLoading: true };
@@ -8,10 +8,12 @@ export default (state = { isLoading: true, contests: [] }, action) => {
       return { ...state, isLoading: false };
     case FETCH_CONTEST:
       return { ...state, contests: action.payload.contest };
+    case FETCH_ONE_CONTEST:
+      return { ...state, contests: action.payload.contest};
     case FETCH_RECENT_CONTEST:
       return { ...state, contests: action.payload.contest };
     case FETCH_RECIPE:
-      return { ...state, recipe: action.payload.recipe };
+      return { ...state, recipes: action.payload.recipes };
     case CREATE:
       return { ...state, contests: [...state.contests, action.payload] };
     case UPDATE:

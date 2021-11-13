@@ -21,6 +21,17 @@ export const getContest = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 }
+export const getContestById = async (req, res) => { 
+    const { id } = req.params;
+
+    try {
+        const contest = await Contest.findById(id);
+        
+        res.status(200).json(contest);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
 
 export const getRecentContests = async (req, res) => {
     try {

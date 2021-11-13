@@ -16,7 +16,7 @@ app.use(cors());
 
 app.use('/posts', postRoutes);
 app.use("/user", userRouter);
-app.use("/home", contestRouter);
+app.use("/", contestRouter);
 
 const CONNECTION_URL = 'mongodb+srv://aoliu:Ao990818@cluster0.adlix.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 const PORT = process.env.PORT|| 5000;

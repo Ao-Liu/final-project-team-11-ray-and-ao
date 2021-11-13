@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Toolbar, Typography, Container, Grow, Grid, AppBar, TextField, Button, Paper, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, Link } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 import medal from '../../images/medal.png';
 
@@ -20,7 +20,7 @@ const Home = () => {
   const query = useQuery();
   const page = query.get('page') || 1;
   const searchQuery = query.get('searchQuery');
-  const {contests, isLoading} = useSelector((state) => state.contests);
+  const {contests, isLoading, recipes} = useSelector((state) => state.contests);
   const [ucStartDate, setUcStartDate] = useState([]);
   const [currentId, setCurrentId] = useState(0);
   const [started, setStarted] = useState(false);
@@ -34,23 +34,8 @@ const Home = () => {
     dispatch(getRecentContests());
   }, []);
 
-  const searchPost = () => {
-    if (search.trim() || tags) {
-      dispatch(getPostsBySearch({ search, tags: tags.join(',') }));
-      history.push(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
-    } else {
-      history.push('/');
-    }
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.keyCode === 13) {
-      searchPost();
-    }
-  };
-
   const handleUpdateTime = () => {
-    let ms = new Date(contests[2].startDate) - new Date();
+    let ms = new Date(contests[0]?.startDate) - new Date();
     if (ms < 0) {
       setStarted(true);
     }
@@ -76,9 +61,7 @@ const Home = () => {
   }
  
   const updateContestInfo = () => {
-    console.log(`------------${JSON.stringify(contests[2].number)}`);
-    console.log(`------------${JSON.stringify(mssecondsToTime(new Date(contests[2].startDate) - new Date()))}`);
-    history.push(`/home/`);
+    console.log(`recipes: ${JSON.stringify(recipes[0])}`);
   }
 
   const handleClickViewRules = () => {
@@ -93,9 +76,9 @@ const Home = () => {
 
   const handleDeleteChip = (chipToDelete) => setTags(tags.filter((tag) => tag !== chipToDelete));
 
-  // const getRecipeById = (id) => {
-  //   dispatch(getRecipe(id));
-  // }
+  const getRecipeById = (id) => {
+    dispatch(getRecipe(id));
+  }
 
   return (
     isLoading ? <CircularProgress /> : <Grow in>
@@ -112,9 +95,9 @@ const Home = () => {
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                Contest Organizer: {contests[2].creator} <br/><br/>
-                Rules: {contests[2].rules} <br/><br/>
-                Prize: {contests[2].prize.map((p) => `${p } `)}
+                Contest Organizer: {contests[0]?.creator} <br/><br/>
+                Rules: {contests[0]?.rules} <br/><br/>
+                Prize: {contests[0]?.prize.map((p) => `${p } `)}
               </DialogContentText>
             </DialogContent>
             <DialogActions>
@@ -127,7 +110,7 @@ const Home = () => {
         </Grid>
         <Grid item xs={12} md={9}>
           <Paper className={classes.holder}  style={{ padding: '72px', borderRadius: '15px', backgroundColor:'#FEF7CE'}} elevation={0}>
-            <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h3" component="h2">{contests[2].name} #{contests[2].number} in</Typography>
+            <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h3" component="h2">{contests[0]?.name} #{contests[0]?.number} in</Typography>
             <div style={{display:'none'}}>{setInterval(handleUpdateTime, 1000)}</div>
             <Typography style={{ fontWeight: 600, textAlign:'center', marginTop: '30px'}} variant="h1" component="h2">{ucStartDate.h}h {ucStartDate.m}m {ucStartDate.s}s</Typography>
             <Grid style={{ marginTop: '30px', textAlign:'center' }}>
@@ -142,17 +125,18 @@ const Home = () => {
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          {/* <div style={{display:'none'}}>{getRecipeById(contests[1].recipe)}</div> */}
           <Paper className={classes.holder} style={{ padding: '50px', borderRadius: '15px', height:"25vh", backgroundColor:'#EFEEFE',}} elevation={0}>
-              <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">{contests[1].name} #{contests[1].number} review</Typography>
-              <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '30px', marginLeft:'20px'}} variant="h2" component="h2">???</Typography>
+              <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">{contests[1]?.name} #{contests[1]?.number} review</Typography>
+              <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '30px', marginLeft:'20px'}} variant="h2" component="h2">{recipes[1]?.data?.name}</Typography>
+              <Button component={Link} to={`/contest/${contests[1]?._id}`} variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#82B36F', color: '#FFF', marginLeft:'30px', marginTop: '30px' }}>Review</Button> 
           </Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.holder} style={{padding: '50px', borderRadius: '15px', height:"25vh", backgroundColor:'#FAE4EC',}} elevation={0}>
-              <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">{contests[0].name} #{contests[0].number} review</Typography>
-              <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '25px', marginLeft:'20px'}} variant="h2" component="h4">???</Typography>
-            </Paper>
+              <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">{contests[2]?.name} #{contests[2]?.number} review</Typography>
+              <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '25px', marginLeft:'20px'}} variant="h2" component="h4">{recipes[2]?.data?.name}</Typography>
+              <Button component={Link} to={`/contest/${contests[2]?._id}`} variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#82B36F', color: '#FFF', marginLeft:'30px', marginTop: '30px' }}>Review</Button> 
+          </Paper>
         </Grid>
       </Grid>
     </Grow>

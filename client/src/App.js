@@ -24,7 +24,7 @@ const App = () => {
           <Route path="/" exact component={() => <Redirect to="/home" />} />
           <Route path="/home" exact component={Home} />
           <Route path="/home/search" exact component={Home} />
-          <Route path="/contest" exact component={Contest} />
+          <Route path="/contest/:id" exact component={Contest} />
           <Route path="/pro" exact component={Pro} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/posts/:id" exact component={PostDetails} />

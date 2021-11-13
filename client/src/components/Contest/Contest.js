@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { Toolbar, Typography, Container, Grow, Grid, AppBar, TextField, Button, Paper, Avatar } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import React, { useState, useEffect} from 'react';
+import { Toolbar, Typography, CircularProgress, Container, Grow, Grid, AppBar, TextField, Button, Paper, Avatar } from '@material-ui/core';
+import { useDispatch, useSelector} from 'react-redux';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 import userAvatar from '../../images/user.png';
+import { getContestById } from '../../actions/contest';
 import Recipe from './Recipe.js';
 import possession from '../../images/possession.png'
 import cash from '../../images/cash.png'
@@ -21,43 +22,28 @@ const Contest = () => {
   const classes = useStyles();
   const query = useQuery();
   const page = query.get('page') || 1;
+  const { id } = useParams();
   const searchQuery = query.get('searchQuery');
-
   const [currentId, setCurrentId] = useState(0);
+  const {contests, isLoading, recipes} = useSelector((state) => state.contests);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getContestById(id));
+  }, [id]);
 
   const [search, setSearch] = useState('');
   const [tags, setTags] = useState([]);
   const [prize1, setPrize1] = useState("$10");
-  const [prize2, setPrize2] = useState("$5");
-  const [prize3, setPrize3] = useState("$3");
-  const [prize4, setPrize4] = useState("$2");
-  const [prize5, setPrize5] = useState("$2");
   const history = useHistory();
-
-  const searchPost = () => {
-    if (search.trim() || tags) {
-      dispatch(getPostsBySearch({ search, tags: tags.join(',') }));
-      history.push(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
-    } else {
-      history.push('/');
-    }
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.keyCode === 13) {
-      searchPost();
-    }
-  };
 
   const handleAddChip = (tag) => setTags([...tags, tag]);
 
   const handleDeleteChip = (chipToDelete) => setTags(tags.filter((tag) => tag !== chipToDelete));
 
   return (
-    <Grow in>
+    isLoading ? <CircularProgress /> : <Grow in>
       <Grid container direction="row" spacing={4} justifyContent="center" alignItems="center">
-        <Grid item sm={12} md={3} justifyContent="center" alignItems="center">
+        <Grid item sm={12} md={3} >
             <Grid container direction="column" spacing={4} justifyContent="center">
                 <Grid item>
                     <Paper style={{ padding: '72px', borderRadius: '15px', backgroundColor:'#FEF7CE', height: '36vh'}} elevation={0}>
@@ -78,38 +64,6 @@ const Contest = () => {
                                 <Typography style={{ fontWeight: 400, marginTop: '40px'}} variant="h5" component="h4">{prize1}</Typography>
                             </Grid>
                         </Grid>
-                        <Grid container>
-                            <Grid item xs={6} sm={6} md={8}>
-                                <Typography style={{ fontWeight: 600, marginTop: '10px'}} variant="h5" component="h4">2nd</Typography>
-                            </Grid>
-                            <Grid item xs={6} sm={6} md={4}>
-                                <Typography style={{ fontWeight: 400, marginTop: '10px'}} variant="h5" component="h4">{prize2}</Typography>
-                            </Grid>
-                        </Grid>
-                        <Grid container>
-                            <Grid item xs={6} sm={6} md={8}>
-                                <Typography style={{ fontWeight: 600, marginTop: '10px'}} variant="h5" component="h4">3rd</Typography>
-                            </Grid>
-                            <Grid item xs={6} sm={6} md={4}>
-                                <Typography style={{ fontWeight: 400, marginTop: '10px'}} variant="h5" component="h4">{prize3}</Typography>
-                            </Grid>
-                        </Grid>
-                        <Grid container>
-                            <Grid item xs={6} sm={6} md={8}>
-                                <Typography style={{ fontWeight: 600, marginTop: '10px'}} variant="h5" component="h4">4th</Typography>
-                            </Grid>
-                            <Grid item xs={6} sm={6} md={4}>
-                                <Typography style={{ fontWeight: 400, marginTop: '10px'}} variant="h5" component="h4">{prize4}</Typography>
-                            </Grid>
-                        </Grid>
-                        <Grid container>
-                            <Grid item xs={6} sm={6} md={8}>
-                                <Typography style={{ fontWeight: 600, marginTop: '10px'}} variant="h5" component="h4">5th</Typography>
-                            </Grid>
-                            <Grid item xs={6} sm={6} md={4}>
-                                <Typography style={{ fontWeight: 400, marginTop: '10px'}} variant="h5" component="h4">{prize5}</Typography>
-                            </Grid>
-                        </Grid>
                     </Paper>
                 </Grid>
                 <Grid item>
@@ -127,7 +81,7 @@ const Contest = () => {
             </Grid>
         </Grid>
         <Grid item sm={12} md={9}>
-            <Recipe/>
+            <Recipe contest={contests.data} recipe={recipes[0].data}/>
         </Grid>
       </Grid>
     </Grow>

@@ -24,5 +24,6 @@ export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
 export const updateUser = (id, user) => API.patch(`/user/${id}`, user);
 export const fetchContest = () => API.get('/home');
+export const fetchContestById = (id) => API.get(`/contest/${id}`);
 export const fetchRecentContest = () => API.get('/home/recent');
-export const fetchRecipe = (id) => API.get(`/home/recipe/${id}`);
+export const fetchRecipe = (id) => API.get(`/recipe/${id}`);
