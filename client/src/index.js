@@ -9,7 +9,7 @@ import App from './App';
 import './index.css';
 
 const store = createStore(reducers, {}, compose(applyMiddleware(thunk)));
-
+console.log(`sad${JSON.stringify(store.getState())}`);
 ReactDOM.render(
   <Provider store={store}>
     <App />
