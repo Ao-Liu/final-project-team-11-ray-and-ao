@@ -13,7 +13,7 @@ export default (state = { isLoading: true, submissions: []}, action) => {
         ...state,
         submissions: action.payload.data,
       };
-    case 'FETCH_SUBMISSIONS_BY_CREATOR':
+    case 'FETCH_SUBMISSIONS_BY_CONTEST':
         return { ...state, submissions: action.payload.data };
     case UPDATE:
       return { ...state, submissions: state.submissions.map((submissions) => (submissions._id === action.payload._id ? action.payload : submissions)) };

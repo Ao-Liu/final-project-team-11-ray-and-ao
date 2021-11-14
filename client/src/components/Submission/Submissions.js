@@ -1,15 +1,24 @@
 import React, { useState, useEffect} from 'react';
 import { Grid, CircularProgress } from '@material-ui/core';
-import { useSelector } from 'react-redux';
-import { getSubmissions } from '../../actions/submission';
+import { useSelector, useDispatch } from 'react-redux';
+import { getSubmissions, getSubmissionsByContest } from '../../actions/submission';
 import Submission from './Submission';
 import useStyles from './styles';
+import { useParams, useHistory, Link } from 'react-router-dom';
+
+function getParameterByName(name) {  
+  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(window.location.search);
+  return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
 const Submissions = ({}) => {
-  const { isLoading, submissions} = useSelector((state) => state.submission);
+  var contest = getParameterByName("contest");
+  console.log(`id: ${contest}`);
+  const { isLoading, submissions} = useSelector((state) => state.submissions);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getSubmissions());
+    dispatch(getSubmissionsByContest(contest));
   }, []);
   const classes = useStyles();
 

@@ -29,8 +29,7 @@ export const getSubmissions = () => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
     const { data: { data} } = await api.fetchSubmissions();
-
-    dispatch({ type: 'FETCH_ALL_SUBMISSIONS', payload: { data, currentPage, numberOfPages } });
+    dispatch({ type: 'FETCH_ALL_SUBMISSIONS', payload: { data } });
     dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);
@@ -42,7 +41,7 @@ export const getSubmissionsByContest = (contest) => async (dispatch) => {
     dispatch({ type: START_LOADING });
     const { data: { data } } = await api.fetchSubmissionsByContest(contest);
 
-    dispatch({ type: 'FETCH_SUBMISSIONS_BY_CREATOR', payload: { data } });
+    dispatch({ type: 'FETCH_SUBMISSIONS_BY_CONTEST', payload: { data } });
     dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);

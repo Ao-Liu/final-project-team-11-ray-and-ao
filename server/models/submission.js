@@ -4,6 +4,7 @@ const submissionSchema = mongoose.Schema({
     title: String,
     selectedFile: String,
     creator: String,
+    creatorName: String,
     createdAt: {
         type: Date,
         default: new Date(),

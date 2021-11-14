@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Toolbar, Typography, Container, Grow, Grid, AppBar, TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
 import { useDispatch,useSelector } from 'react-redux';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useHistory, useLocation, useParams, Link } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 import userAvatar from '../../images/user.png';
 import FileBase from 'react-file-base64';
@@ -102,7 +102,7 @@ const Recipe = ({contest, recipe}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(createSubmission({...submData, creator: user?.result?._id, contest: contest?._id}, history, contest));
+    dispatch(createSubmission({...submData, creator: user?.result?._id, creatorName: user?.result?.name, contest: contest?._id}, history, contest));
     handleCloseAddSubmission();
   };
 
@@ -151,7 +151,7 @@ const Recipe = ({contest, recipe}) => {
                 </Grid>
                 <Grid item xs={12} md={3}>
                   {!ended? <Button variant="contained" size="large" color="primary" onClick={handleClickAddSubmission} disableElevation style={{ backgroundColor: '#173A56', margin: '10px 20px' }}>Add Submission</Button>
-                  : <Button variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#173A56', margin: '10px 20px' }}>View All Submissions</Button>} 
+                  : <Button variant="contained" component={Link} to={`/submissions?contest=${contest?._id}`} size="large" color="primary" disableElevation style={{ backgroundColor: '#173A56', margin: '10px 20px' }}>View All Submissions</Button>} 
                 </Grid>
             </Grid>
             <Grid container justifyContent="space-evenly" alignItems="center" style={{ marginTop: "30px"}}>
