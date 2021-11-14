@@ -46,7 +46,7 @@ const Contest = () => {
         <Grid item sm={12} md={3} >
             <Grid container direction="column" spacing={4} justifyContent="center">
                 <Grid item>
-                    <Paper style={{ padding: '72px', borderRadius: '15px', backgroundColor:'#FEF7CE', height: '36vh'}} elevation={0}>
+                    <Paper style={{ padding: '12vh 5vh', borderRadius: '15px', backgroundColor:'#FEF7CE'}} elevation={0}>
                         <Grid container>
                             <Grid item xs={6} sm={6} md={8}>
                                 <Typography style={{ fontWeight: 600}} variant="h3" component="h2">Prize</Typography>
@@ -57,24 +57,30 @@ const Contest = () => {
                             </Grid>
                         </Grid>
                         <Grid container>
-                            <Grid item xs={6} sm={6} md={8}>
-                                <Typography style={{ fontWeight: 600, marginTop: '40px'}} variant="h5" component="h4">1st</Typography>
+                            <Grid item sm={6}>
+                                <Typography style={{ fontWeight: 600, marginTop: '30px'}} variant="h5" component="h4">1st</Typography>
+                                <Typography style={{ fontWeight: 600, marginTop: '30px'}} variant="h5" component="h4">2nd</Typography>
                             </Grid>
-                            <Grid item xs={6} sm={6} md={4}>
-                                <Typography style={{ fontWeight: 400, marginTop: '40px'}} variant="h5" component="h4">{prize1}</Typography>
+                            <Grid item sm={6}>
+                                <Typography style={{ fontWeight: 400, marginTop: '30px', marginLeft: '20px'}} variant="h5" component="h4">$100</Typography>
+                                <Typography style={{ fontWeight: 400, marginTop: '30px', marginLeft: '20px'}} variant="h5" component="h4">$50</Typography>
+                            </Grid>
+                            <Grid item sm={6}>
+                                <Typography style={{ fontWeight: 600, marginTop: '30px'}} variant="h5" component="h4">3rd</Typography>
+                            <Typography style={{ fontWeight: 600, marginTop: '30px'}} variant="h5" component="h4">participate</Typography>
+                            </Grid>
+                            <Grid item sm={6}>
+                                <Typography style={{ fontWeight: 400, marginTop: '30px', marginLeft: '20px'}} variant="h5" component="h4">$30</Typography>
+                                <Typography style={{ fontWeight: 400, marginTop: '30px', marginLeft: '20px'}} variant="h5" component="h4">$10</Typography>
                             </Grid>
                         </Grid>
                     </Paper>
                 </Grid>
                 <Grid item>
-                    <Paper style={{ padding: '72px', borderRadius: '15px', backgroundColor:'#EFEEFE', height: '15vh'}} elevation={0}>
-                        <Grid container direction="row" justifyContent="center" style={{ marginTop: '40px'}}>
-                            <Grid item xs={6} sm={6} md={6}>
-                                <Typography style={{ marginTop: '20px', fontWeight: 600}} variant="h4" component="h4">Rules</Typography>
-                            </Grid>
-                            <Grid item xs={6} sm={6} md={6}>
-                                <Button variant="contained" color="primary" disableElevation style={{ fontSize:"30px", height: '2.5em', width:"5.5em", backgroundColor: '#74B666' }}>View</Button>
-                            </Grid>
+                    <Paper style={{ padding: '10vh 5vh', borderRadius: '15px', backgroundColor:'#EFEEFE'}} elevation={0}>
+                        <Grid container direction='row' style={{ textAlign:'center' }}>
+                            <Typography style={{ fontWeight: 600}} variant="h4" component="h4">Rules</Typography>
+                            <Button variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#82B36F', color: '#FFF', marginLeft:'20px' }}>Review</Button> 
                         </Grid>
                     </Paper>
                 </Grid>

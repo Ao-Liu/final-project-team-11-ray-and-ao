@@ -27,3 +27,4 @@ export const fetchContest = () => API.get('/home');
 export const fetchContestById = (id) => API.get(`/contest/${id}`);
 export const fetchRecentContest = () => API.get('/home/recent');
 export const fetchRecipe = (id) => API.get(`/recipe/${id}`);
+export const createSubmission = (newSubmission) => API.post(`/submissions`, newSubmission);

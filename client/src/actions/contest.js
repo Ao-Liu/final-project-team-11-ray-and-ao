@@ -1,4 +1,4 @@
-import { START_LOADING, END_LOADING, FETCH_ONE_CONTEST, FETCH_CONTEST, FETCH_RECENT_CONTEST, FETCH_RECIPE } from '../constants/actionTypes';
+import { CREATE, START_LOADING, END_LOADING, FETCH_ONE_CONTEST, FETCH_CONTEST, FETCH_RECENT_CONTEST, FETCH_RECIPE } from '../constants/actionTypes';
 import * as api from '../api/index.js';
 
 export const getContest = () => async (dispatch) => {

@@ -7,6 +7,7 @@ import cors from 'cors';
 import postRoutes from './routes/posts.js';
 import userRouter from "./routes/user.js"; 
 import contestRouter from "./routes/contest.js";
+import submissionRouter from "./routes/submission.js";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cors());
 app.use('/posts', postRoutes);
 app.use("/user", userRouter);
 app.use("/", contestRouter);
+app.use("/submissions", submissionRouter);
 
 const CONNECTION_URL = 'mongodb+srv://aoliu:Ao990818@cluster0.adlix.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 const PORT = process.env.PORT|| 5000;

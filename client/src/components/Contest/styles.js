@@ -20,6 +20,10 @@ export default makeStyles((theme) => ({
     fontSize: '2em',
     fontWeight: 300,
   },
+  fileInput: {
+    width: '97%',
+    margin: '15px 0',
+  },
   image: {
     marginLeft: '10px',
     marginTop: '5px',

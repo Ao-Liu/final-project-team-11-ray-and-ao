@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { Toolbar, Typography, Container, Grow, Grid, AppBar, TextField, Button, Paper} from '@material-ui/core';
+import { Toolbar, Typography, Container, Grow, Grid, AppBar, TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 import userAvatar from '../../images/user.png';
+import FileBase from 'react-file-base64';
 
-import { getPostsBySearch } from '../../actions/posts';
 import Form from '../Form/Form';
 import Pagination from '../Pagination';
 import useStyles from './styles';
+import { createSubmission } from '../../actions/submission';
+
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -25,6 +27,9 @@ const Recipe = ({contest, recipe}) => {
   const history = useHistory();
   const [ingredients, setIngredients] = useState(["Puff Pastry"]);
   const [ingMesures, setIngMesures] = useState(["320g"]);
+  const [submData, setSubmData] = useState({ title: '', message: '', tags: [], selectedFile: '' });
+  const [rulesOpen, setRulesOpen] = React.useState(false);
+  const { id } = useParams();
 
   const [ucStartDate, setUcStartDate] = useState([]);
 
@@ -55,15 +60,41 @@ const Recipe = ({contest, recipe}) => {
     return obj;
   }
 
+  const handleCloseViewRules = () => {
+    setRulesOpen(false);
+  }
+
+  const handleClickViewRules = () => {
+    setRulesOpen(true);
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let newSub = {"title":"Check out this Chinon Apple Tarts that I cooked in 2 hours",
+    "selectedFile":"",
+    "creator":"618707539f0d4220d553e466",
+    "contest":"618b1e3e40baa84fadca8a5d"}
+    dispatch(createSubmission(newSub, history))
+    clear();
+  };
+
+  const clear = () => {
+    setCurrentId(0);
+    setSubmData({ title: '', message: '', tags: [], selectedFile: '' });
+  };
+
   return (
     <Grow in>
-        <Paper style={{ padding: '50px', borderRadius: '15px', backgroundColor:'#DFF9FF', height: '74vh'}} elevation={0}>
+        <Paper style={{ padding: '2vh 3vh 8vh 3vh', borderRadius: '15px', backgroundColor:'#DFF9FF', height: '74vh'}} elevation={0}>
             <Grid container direction="row" justifyContent="center" >
-                <Grid item xs={12} md={10}>
-                    <Typography style={{ fontWeight: 600, marginTop:"20px"}} variant="h3" component="h2">{contest?.name} #{contest?.number}</Typography>
+                <Grid item xs={12} md={8}>
+                  <Typography style={{ fontWeight: 600 }} variant="h3" component="h3">{contest?.name} #{contest?.number}</Typography>
                 </Grid>
                 <Grid item xs={12} md={2}>
-                    <Button variant="contained" color="primary" disableElevation style={{ fontSize:"30px", height: '2.5em', width:"5.5em",  backgroundColor: '#173A56' }}>Submit</Button>
+                  <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setSubmData({ ...submData, selectedFile: base64 })} /></div>
+                </Grid>
+                <Grid item xs={12} md={2}>
+                  <Button variant="contained" size="large" color="primary" onClick={handleSubmit} disableElevation style={{  backgroundColor: '#173A56', margin: '10px 20px', }}>Submit</Button> 
                 </Grid>
             </Grid>
             <Grid container justifyContent="space-evenly" alignItems="center" style={{ marginTop: "30px"}}>
@@ -78,39 +109,59 @@ const Recipe = ({contest, recipe}) => {
                   <Typography style={{ fontWeight: 600, textAlign:"right"}} variant="h3" component="h4">{ucStartDate?.h}:{ucStartDate?.m}:{ucStartDate?.s}</Typography>
                 </Grid>
             </Grid>
-            <Grid container direction="row">
-                <Grid item sm={12} md={3}>
-                    <Grid container direction="column">
-                        <Grid item md={3} style={{ marginTop: "30px"}}>
-                            <img alt="recipe_thumb" src={recipe?.thumbUrl} style={{height: "25vh"}}/>
-                        </Grid>
-                        <Grid item md={9}>
-                        <Typography display="inline" style={{ fontWeight: 500 }} variant="h5" component="h5">Ingredients: </Typography>
-                            <Grid container>
-                                <Grid item md={8}>
-                                  <Grid container>
-                                    {recipe?.ingredients?.map((ing, key) => (
-                                      <Grid item md={12}>
-                                      <Typography display="inline" key={key} style={{ fontWeight: 400, fontSize:"16px"}} variant="h5" component="h4">
-                                        {ing}
-                                      </Typography>
-                                      </Grid>
-                                    ))}
-                                  </Grid>
-                                </Grid>
-                                <Grid item md={4}>
-                                <Grid container>
-                                    {recipe?.ingMeasures?.map((ing, key) => (
-                                      <Grid item md={12}>
-                                        <Typography display="inline" key={key} style={{ fontWeight: 400, fontSize:"16px"}} variant="h5" component="h4">{ing}</Typography>
-                                      </Grid>
-                                    ))}
-                                  </Grid>
-                                </Grid>
+
+            <Grid>
+              <Dialog
+                open={rulesOpen}
+                onClose={handleCloseViewRules}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">
+                  {"Ingredients"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    <Grid container style={{ padding:'20px' }}>
+                      <Grid item md={8}>
+                        <Grid container>
+                          {recipe?.ingredients?.map((ing, key) => (
+                            <Grid item md={12}>
+                            <Typography display="inline" key={key} style={{ fontWeight: 400, fontSize:"16px"}} variant="h5" component="h4">
+                              {ing}
+                            </Typography>
                             </Grid>
+                          ))}
                         </Grid>
+                      </Grid>
+                      <Grid item md={4}>
+                      <Grid container>
+                          {recipe?.ingMeasures?.map((ing, key) => (
+                            <Grid item md={12}>
+                              <Typography display="inline" key={key} style={{ fontWeight: 400, fontSize:"16px"}} variant="h5" component="h4">{ing}</Typography>
+                            </Grid>
+                          ))}
+                        </Grid>
+                      </Grid>
                     </Grid>
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleCloseViewRules} autoFocus> Close </Button>
+                </DialogActions>
+              </Dialog>
+            </Grid>
+            <Grid container direction="row">
+              <Grid item sm={12} md={3}>
+                <Grid container direction="column">
+                  <Grid item md={3} style={{ marginTop: "30px"}}>
+                      <img alt="recipe_thumb" src={recipe?.thumbUrl} style={{height: "25vh"}}/>
+                  </Grid>
+                  <Grid item md={9}>
+                  <Button variant="contained" size="large" color="primary" disableElevation onClick={handleClickViewRules} style={{ backgroundColor: '#82B36F', color: '#FFF', marginLeft:'20px', marginTop: '20px'}}>View Ingredients</Button> 
+                  </Grid>
                 </Grid>
+              </Grid>
                 <Grid item sm={12} md={9}> 
                     <Typography style={{ fontSize:"20px", marginTop: '20px', fontWeight: 400}} variant="h5" component="h4">{recipe?.instructions}</Typography>
                 </Grid>

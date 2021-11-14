@@ -112,7 +112,7 @@ const Home = () => {
           <Paper className={classes.holder}  style={{ padding: '72px', borderRadius: '15px', backgroundColor:'#FEF7CE'}} elevation={0}>
             <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h3" component="h2">{contests[0]?.name} #{contests[0]?.number} in</Typography>
             <div style={{display:'none'}}>{setInterval(handleUpdateTime, 1000)}</div>
-            <Typography style={{ fontWeight: 600, textAlign:'center', marginTop: '30px'}} variant="h1" component="h2">{ucStartDate.h}h {ucStartDate.m}m {ucStartDate.s}s</Typography>
+            <Typography style={{ fontWeight: 600, textAlign:'center', marginTop: '30px'}} variant="h1" component="h2">{ucStartDate.h}h {ucStartDate?.m}m {ucStartDate?.s}s</Typography>
             <Grid style={{ marginTop: '30px', textAlign:'center' }}>
               {started ? <Button variant="contained" size="large" color="primary" 
               onClick={updateContestInfo} 
@@ -125,17 +125,17 @@ const Home = () => {
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.holder} style={{ padding: '50px', borderRadius: '15px', height:"25vh", backgroundColor:'#EFEEFE',}} elevation={0}>
-              <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">{contests[1]?.name} #{contests[1]?.number} review</Typography>
-              <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '30px', marginLeft:'20px'}} variant="h2" component="h2">{recipes[1]?.data?.name}</Typography>
-              <Button component={Link} to={`/contest/${contests[1]?._id}`} variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#82B36F', color: '#FFF', marginLeft:'30px', marginTop: '30px' }}>Review</Button> 
+          <Paper className={classes.holder} style={{ padding: '50px', borderRadius: '15px', backgroundColor:'#EFEEFE',}} elevation={0}>
+            <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">{contests[1]?.name} #{contests[1]?.number} review</Typography>
+            <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '30px', marginLeft:'20px'}} variant="h2" component="h2">{recipes[1]?.data?.name}</Typography>
+            <Button component={Link} to={`/contest/${contests[1]?._id}`} variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#82B36F', color: '#FFF', marginLeft:'30px', marginTop: '30px' }}>Review</Button> 
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.holder} style={{padding: '50px', borderRadius: '15px', height:"25vh", backgroundColor:'#FAE4EC',}} elevation={0}>
-              <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">{contests[2]?.name} #{contests[2]?.number} review</Typography>
-              <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '25px', marginLeft:'20px'}} variant="h2" component="h4">{recipes[2]?.data?.name}</Typography>
-              <Button component={Link} to={`/contest/${contests[2]?._id}`} variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#82B36F', color: '#FFF', marginLeft:'30px', marginTop: '30px' }}>Review</Button> 
+          <Paper className={classes.holder} style={{padding: '50px', borderRadius: '15px', backgroundColor:'#FAE4EC',}} elevation={0}>
+            <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">{contests[2]?.name} #{contests[2]?.number} review</Typography>
+            <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '25px', marginLeft:'20px'}} variant="h2" component="h4">{recipes[2]?.data?.name}</Typography>
+            <Button component={Link} to={`/contest/${contests[2]?._id}`} variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#82B36F', color: '#FFF', marginLeft:'30px', marginTop: '30px' }}>Review</Button> 
           </Paper>
         </Grid>
       </Grid>
