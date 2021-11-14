@@ -96,8 +96,6 @@ const Recipe = ({contest, recipe}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setSubmData({title: titleText, selectedFile: "", message: descriptionText});
-    console.log(submData);
     dispatch(createSubmission({...submData, creator: user?.result?._id, contest: contest?._id}, history));
     window.location.reload();
   };

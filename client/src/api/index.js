@@ -25,6 +25,7 @@ export const signUp = (formData) => API.post('/user/signup', formData);
 export const updateUser = (id, user) => API.patch(`/user/${id}`, user);
 export const fetchContest = () => API.get('/home');
 export const fetchContestById = (id) => API.get(`/contest/${id}`);
+export const updateContest = (id, contest) => API.patch(`/contest/${id}`, contest);
 export const fetchRecentContest = () => API.get('/home/recent');
 export const fetchRecipe = (id) => API.get(`/recipe/${id}`);
 export const createSubmission = (newSubmission) => API.post(`/submissions`, newSubmission);

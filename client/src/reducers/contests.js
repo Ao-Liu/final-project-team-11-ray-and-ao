@@ -16,7 +16,7 @@ export default (state = { isLoading: true, contests: [], recipes: [] }, action) 
       return { ...state, recipes: action.payload.recipes };
     case CREATE:
       return { ...state, contests: [...state.contests, action.payload] };
-    case UPDATE:
+    case 'UPDATE_CONTEST':
       return { ...state, contests: state.contests.map((contest) => (contest._id === action.payload._id ? action.payload : contest)) };
     case DELETE:
       return { ...state, contests: state.contests.filter((contest) => contest._id !== action.payload) };
