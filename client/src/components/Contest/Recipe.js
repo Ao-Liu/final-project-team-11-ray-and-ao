@@ -29,7 +29,7 @@ const Recipe = ({contest, recipe}) => {
   const [submData, setSubmData] = useState({ title: '', message: '', selectedFile: '' });
   const [rulesOpen, setRulesOpen] = useState(false);
   const [submissionOpen, setSubmissionOpen] = useState(false);
-
+  const [ended, setEnded] = useState(false);
   const [titleText, setTitleText] = useState("");
   const [descriptionText, setDescriptionText] = useState("");
   const [titleErrorText, setTitleErrorText] = useState("");
@@ -53,6 +53,7 @@ const Recipe = ({contest, recipe}) => {
     let ms = new Date(contest?.endDate) - new Date();
     if (ms < 0) {
       setUcStartDate("");
+      setEnded(true);
     } else {
       setUcStartDate(mssecondsToTime(ms));
     }
@@ -61,13 +62,10 @@ const Recipe = ({contest, recipe}) => {
   const mssecondsToTime = (secs) => {
     secs = Math.floor(secs/1000);
     let hours = Math.floor(secs / (60 * 60));
-
     let divisor_for_minutes = secs % (60 * 60);
     let minutes = Math.abs(Math.floor(divisor_for_minutes / 60));
-
     let divisor_for_seconds = divisor_for_minutes % 60;
     let seconds = Math.abs(Math.ceil(divisor_for_seconds));
-
     let obj = {
       "h": hours,
       "m": minutes,
@@ -96,7 +94,6 @@ const Recipe = ({contest, recipe}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setSubmData({title: titleText, selectedFile: "", message: descriptionText});
     console.log(submData);
     dispatch(createSubmission({...submData, creator: user?.result?._id, contest: contest?._id}, history));
     window.location.reload();
@@ -146,7 +143,8 @@ const Recipe = ({contest, recipe}) => {
                   <Typography style={{ fontWeight: 600 }} variant="h3" component="h3">{contest?.name} #{contest?.number}</Typography>
                 </Grid>
                 <Grid item xs={12} md={3}>
-                  <Button variant="contained" size="large" color="primary" onClick={handleClickAddSubmission} disableElevation style={{  backgroundColor: '#173A56', margin: '10px 20px', }}>Add Submission</Button> 
+                  {!ended? <Button variant="contained" size="large" color="primary" onClick={handleClickAddSubmission} disableElevation style={{ backgroundColor: '#173A56', margin: '10px 20px' }}>Add Submission</Button>
+                  : <Button variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#173A56', margin: '10px 20px' }}>View All Submissions</Button>} 
                 </Grid>
             </Grid>
             <Grid container justifyContent="space-evenly" alignItems="center" style={{ marginTop: "30px"}}>
@@ -158,7 +156,8 @@ const Recipe = ({contest, recipe}) => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={5}>
                   <div style={{display:'none'}}>{setInterval(handleUpdateTime, 1000)}</div>
-                  <Typography style={{ fontWeight: 600, textAlign:"right"}} variant="h3" component="h4">{ucStartDate?.h}:{ucStartDate?.m}:{ucStartDate?.s}</Typography>
+                  {ended ? <Typography style={{ fontWeight: 600, textAlign:"right"}} variant="h3" component="h4">Contest Ended</Typography>
+                  : <Typography style={{ fontWeight: 600, textAlign:"right"}} variant="h3" component="h4">{ucStartDate?.h}h {ucStartDate?.m}m {ucStartDate?.s}s</Typography>}
                 </Grid>
             </Grid>
 

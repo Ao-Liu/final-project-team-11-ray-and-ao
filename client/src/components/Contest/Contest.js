@@ -76,7 +76,7 @@ const Contest = () => {
                     <Paper style={{ padding: '10vh 5vh', borderRadius: '15px', backgroundColor:'#EFEEFE'}} elevation={0}>
                         <Grid container direction='row' style={{ textAlign:'center' }}>
                             <Typography style={{ fontWeight: 600}} variant="h4" component="h4">Rules</Typography>
-                            <Button variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#82B36F', color: '#FFF', marginLeft:'20px' }}>Review</Button> 
+                            <Button variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#82B36F', color: '#FFF', marginLeft:'20px' }}>View</Button> 
                         </Grid>
                     </Paper>
                 </Grid>
