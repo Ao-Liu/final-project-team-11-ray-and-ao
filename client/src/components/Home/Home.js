@@ -15,6 +15,15 @@ import useStyles from './styles';
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
+
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
+
 const Home = () => {
   const classes = useStyles();
   const query = useQuery();
@@ -29,29 +38,34 @@ const Home = () => {
   const [rulesOpen, setRulesOpen] = React.useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
+  const curUser = JSON.parse(localStorage.getItem('profile'));
+  console.log(`user ${curUser}`);
+  const [user, setUser] = useState(curUser);
+
+  // useEffect(() => {
+  //   setUser(curUser);
+  // }, [curUser])
 
   useEffect(() => {
     dispatch(getRecentContests());
   }, []);
 
   const handleUpdateTime = () => {
-    let ms = new Date(contests[0]?.startDate) - new Date();
+    let ms = started? new Date(contests[0]?.endDate) - new Date() : new Date(contests[0]?.startDate) - new Date();
     if (ms < 0) {
       setStarted(true);
     }
     setUcStartDate(mssecondsToTime(ms));
+    // console.log(user);
   }
 
   const mssecondsToTime = (secs) => {
     secs = Math.floor(secs/1000);
     let hours = Math.floor(secs / (60 * 60));
-
     let divisor_for_minutes = secs % (60 * 60);
     let minutes = Math.abs(Math.floor(divisor_for_minutes / 60));
-
     let divisor_for_seconds = divisor_for_minutes % 60;
     let seconds = Math.abs(Math.ceil(divisor_for_seconds));
-
     let obj = {
       "h": hours,
       "m": minutes,
@@ -88,8 +102,7 @@ const Home = () => {
             open={rulesOpen}
             onClose={handleCloseViewRules}
             aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
+            aria-describedby="alert-dialog-description">
             <DialogTitle id="alert-dialog-title">
               {"Rules"}
             </DialogTitle>
@@ -114,16 +127,15 @@ const Home = () => {
         </Grid>
         <Grid item xs={12} md={9}>
           <Paper className={classes.holder}  style={{ padding: '72px', borderRadius: '15px', backgroundColor:'#FEF7CE'}} elevation={0}>
-            <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h3" component="h2">{contests[0]?.name} #{contests[0]?.number} in</Typography>
+            {started ? <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h3" component="h2">{contests[0]?.name} #{contests[0]?.number} ENDS in</Typography> :
+            <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h3" component="h2">{contests[0]?.name} #{contests[0]?.number} in</Typography>}
             <div style={{display:'none'}}>{setInterval(handleUpdateTime, 1000)}</div>
-            <Typography style={{ fontWeight: 600, textAlign:'center', marginTop: '30px'}} variant="h1" component="h2">{ucStartDate.h}h {ucStartDate?.m}m {ucStartDate?.s}s</Typography>
+            {started ? <Typography style={{ fontWeight: 600, textAlign:'center', marginTop: '30px'}} variant="h1" component="h2">{ucStartDate.h}h {ucStartDate?.m}m {ucStartDate?.s}s</Typography> : 
+            <Typography style={{ fontWeight: 600, textAlign:'center', marginTop: '30px'}} variant="h1" component="h2">{ucStartDate.h}h {ucStartDate?.m}m {ucStartDate?.s}s</Typography>}
             <Grid style={{ marginTop: '30px', textAlign:'center' }}>
               {started ? <Button variant="contained" size="large" color="primary" 
-              onClick={updateContestInfo} 
-              disableElevation style={{ backgroundColor: '#82B36F', fontSize:"26px", height: '2.5em', width:"5.5em"}}>Register Now</Button> : 
-              <Button variant="contained" size="large" color="primary" 
-              onClick={updateContestInfo} 
-              disableElevation style={{ backgroundColor: '#82B36F', fontSize:"26px", height: '2.5em', width:"5.5em"}}>Preview</Button>}
+              onClick={updateContestInfo} component={Link} to={`/contest/${contests[0]?._id}`} 
+              disableElevation style={{ backgroundColor: '#82B36F', fontSize:"26px", height: '2.5em',}}>Register Now</Button> : null}
               <Button variant="contained" size="large" color="primary" disableElevation onClick={handleClickViewRules} 
                       style={{ backgroundColor: '#FFF', color: '#000', marginLeft:'30px', fontSize:"26px", height: '2.5em', width:"5.5em"}}
                       >Rules</Button> 
