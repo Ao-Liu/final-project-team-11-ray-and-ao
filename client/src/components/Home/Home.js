@@ -126,16 +126,54 @@ const Home = () => {
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.holder} style={{ padding: '50px', borderRadius: '15px', height:"25vh", backgroundColor:'#EFEEFE',}} elevation={0}>
-              <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">{contests[1]?.name} #{contests[1]?.number} review</Typography>
-              <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '30px', marginLeft:'20px'}} variant="h2" component="h2">{recipes[1]?.data?.name}</Typography>
-              <Button component={Link} to={`/contest/${contests[1]?._id}`} variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#82B36F', color: '#FFF', marginLeft:'30px', marginTop: '30px' }}>Review</Button> 
+              <Grid container direction="column" spacing={2}>
+                <Grid item xs={12}>
+                  <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">{contests[1]?.name} #{contests[1]?.number} review</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Grid container direction="row" spacing={1} justifyContent="center" alignItems="center">
+                    <Grid item xs={12} md={4}>
+                      <img alt="recipe_thumb" src={recipes[1]?.data?.thumbUrl} style={{height: "20vh"}}/>
+                    </Grid>
+                    <Grid item xs={12} md={8}>
+                      <Grid container direction="column" spacing={1} justifyContent="center" alignItems="center">
+                        <Grid item>
+                          <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '30px', marginLeft:'20px'}} variant="h2" component="h2">{recipes[1]?.data?.name}</Typography>
+                        </Grid>
+                        <Grid item>
+                          <Button component={Link} to={`/contest/${contests[1]?._id}`} variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#82B36F', color: '#FFF', marginLeft:'30px', marginTop: '30px' }}>Review</Button>  
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
           </Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.holder} style={{padding: '50px', borderRadius: '15px', height:"25vh", backgroundColor:'#FAE4EC',}} elevation={0}>
-              <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">{contests[2]?.name} #{contests[2]?.number} review</Typography>
-              <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '25px', marginLeft:'20px'}} variant="h2" component="h4">{recipes[2]?.data?.name}</Typography>
-              <Button component={Link} to={`/contest/${contests[2]?._id}`} variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#82B36F', color: '#FFF', marginLeft:'30px', marginTop: '30px' }}>Review</Button> 
+          <Grid container direction="column" spacing={2}>
+                <Grid item xs={12}>
+                <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">{contests[2]?.name} #{contests[2]?.number} review</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Grid container direction="row" spacing={1} justifyContent="center" alignItems="center">
+                    <Grid item xs={12} md={4}>
+                      <img alt="recipe_thumb2" src={recipes[2]?.data?.thumbUrl} style={{height: "20vh"}}/>
+                    </Grid>
+                    <Grid item xs={12} md={8}>
+                      <Grid container direction="column" spacing={1} justifyContent="center" alignItems="center">
+                        <Grid item>
+                        <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '25px', marginLeft:'20px'}} variant="h2" component="h4">{recipes[2]?.data?.name}</Typography>
+                        </Grid>
+                        <Grid item>
+                        <Button component={Link} to={`/contest/${contests[2]?._id}`} variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#82B36F', color: '#FFF', marginLeft:'30px', marginTop: '30px' }}>Review</Button> 
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>        
           </Paper>
         </Grid>
       </Grid>
