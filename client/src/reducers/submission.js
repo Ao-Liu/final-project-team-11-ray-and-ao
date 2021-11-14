@@ -1,6 +1,6 @@
 import { CREATE, UPDATE, DELETE } from '../constants/actionTypes';
 
-export default (state = { isLoading: true, submissions: []}, action) => {
+export default (state = { isLoading: true, needRefresh: false, submissions: []}, action) => {
   switch (action.type) {
     case 'START_LOADING':
       return { ...state, isLoading: true };

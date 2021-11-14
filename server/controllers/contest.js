@@ -55,15 +55,15 @@ export const getRecipe = async (req, res) => {
 
 export const updateContest = async (req, res) => {
     const { id } = req.params;
-    const { submissions } = req.body;
+    const { submissions, prize, _id, name, number, creator, recipe, startDate, endDate, rules } = req.body;
     
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No contest with id: ${id}`);
 
-    const updatedContest = { submissions: submissions, _id: id };
+    const updatedContest = { submissions: submissions, _id: id};
 
     await Contest.findByIdAndUpdate(id, updatedContest, { new: true });
 
-    res.json(updatedPost);
+    res.json(updatedContest);
 }
 
 export default router;

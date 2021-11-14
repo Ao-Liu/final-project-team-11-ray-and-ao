@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Toolbar, Typography, Container, Grow, Grid, AppBar, TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 import userAvatar from '../../images/user.png';
@@ -94,9 +94,8 @@ const Recipe = ({contest, recipe}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(submData);
-    dispatch(createSubmission({...submData, creator: user?.result?._id, contest: contest?._id}, history));
-    window.location.reload();
+    // console.log(submData);
+    dispatch(createSubmission({...submData, creator: user?.result?._id, contest: contest?._id}, history, contest));
   };
 
   return (

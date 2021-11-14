@@ -7,7 +7,7 @@ const contestSchema = mongoose.Schema({
     recipe: String,//stores ID
     startDate: Date,
     endDate: Date,
-    submissions: [String],// stores IDs
+    submissions: { type: [String] },
     rules: String,
     prize: [String], 
 })
