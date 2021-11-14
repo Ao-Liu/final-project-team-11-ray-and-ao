@@ -32,3 +32,4 @@ export const createSubmission = (newSubmission) => API.post(`/submissions`, newS
 export const deleteSubmission = (id) => API.delete(`/submissions/${id}`);
 export const fetchSubmissions = () => API.get(`/submissions`);
 export const fetchSubmissionsByContest = (contest) => API.get(`/submissions?contest=${contest}`);
+export const fetchSubmissionsByCreator = (creator) => API.get(`/submissions?creator=${creator}`);

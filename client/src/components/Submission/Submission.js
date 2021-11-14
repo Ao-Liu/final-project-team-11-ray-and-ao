@@ -7,7 +7,7 @@ import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import { deleteSubmission } from '../../actions/submission';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { useHistory } from 'react-router-dom';
+import { useHistory , Link } from 'react-router-dom';
 
 import useStyles from './styles';
 
@@ -17,7 +17,7 @@ const Submission = ({ submission }) => {
   const history = useHistory();
   const classes = useStyles();
 
-  const userId = user?.result.googleId || user?.result?._id;
+  const userId = user?.result?.googleId || user?.result?._id;
 
   // const openPost = (e) => {
   //   // dispatch(getPost(post._id, history));

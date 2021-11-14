@@ -47,3 +47,15 @@ export const getSubmissionsByContest = (contest) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const getSubmissionsByCreator = (creator) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const { data: { data } } = await api.fetchSubmissionsByCreator(creator);
+
+    dispatch({ type: 'FETCH_SUBMISSIONS_BY_CONTEST', payload: { data } });
+    dispatch({ type: END_LOADING });
+  } catch (error) {
+    console.log(error);
+  }
+};

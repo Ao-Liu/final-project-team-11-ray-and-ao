@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Toolbar, Typography, Container, Grow, Grid, AppBar, TextField, Button, Paper, Avatar, IconButton} from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import { useDispatch } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation , Link } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 import userAvatar from '../../images/user.png';
 import possessionImg from '../../images/possession.png'
@@ -17,6 +17,12 @@ function useQuery() {
 }
 const Profile = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
+  let userId = 0;
+  if (user?.result?.googleId) {
+    userId = user?.result?.googleId
+  } else if (user?.result?._id) {
+    userId = user?.result?._id
+  }
   const dispatch = useDispatch();
   
   const classes = useStyles();
@@ -65,6 +71,14 @@ const Profile = () => {
             <Grid item>
               <Paper style={{padding: '50px', borderRadius: '15px', backgroundColor:'#FAE4EC', height: '45vh'}} elevation={0}>
               <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">My Submissions</Typography>
+                {userId ? <Button component={Link} 
+                                to={`/submissions?user=${userId}`} 
+                                variant="contained" size="large" 
+                                color="primary" 
+                                disableElevation 
+                                style={{ fontSize:"26px", backgroundColor: '#82B36F', height: '2.5em', width:"5.5em", color: '#FFF', marginLeft:'30px', marginTop: '30px' }}
+                                >View</Button> : 
+                          <Typography style={{ fontWeight: 600, marginTop: '6px'}} variant="h5" component="h4">Feature Not Available</Typography>}
               </Paper>
             </Grid>
           </Grid>

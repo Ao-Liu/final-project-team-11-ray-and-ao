@@ -25,14 +25,25 @@ export const deleteSubmission = async (req, res) => {
     res.json({ message: "Submission deleted successfully." });
 }
 
-export const getSubmissionsByContest = async (req, res) => {
-    const {contest} = req.query;
-    try {
-        const subs = await Submission.find({contest}).sort({ _id: -1 });
-        res.json({ data: subs });
-    } catch (error) {    
-        res.status(404).json({ message: error.message });
+export const getSubmissionsByQuery = async (req, res) => {
+    const {contest, creator} = req.query;
+    if (contest) {
+        try {
+            const subs = await Submission.find({contest}).sort({ _id: -1 });
+            res.json({ data: subs });
+        } catch (error) {    
+            res.status(404).json({ message: error.message });
+        }
     }
+    if (creator) {
+        try {
+            const subs = await Submission.find({creator}).sort({ _id: -1 });
+            res.json({ data: subs });
+        } catch (error) {    
+            res.status(404).json({ message: error.message });
+        }
+    }
+    
 }
 
 export default router;

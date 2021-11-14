@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import { Grid, CircularProgress } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
-import { getSubmissions, getSubmissionsByContest } from '../../actions/submission';
+import { getSubmissions, getSubmissionsByContest, getSubmissionsByCreator } from '../../actions/submission';
 import Submission from './Submission';
 import useStyles from './styles';
 import { useParams, useHistory, Link } from 'react-router-dom';
@@ -14,11 +14,16 @@ function getParameterByName(name) {
 
 const Submissions = ({}) => {
   var contest = getParameterByName("contest");
-  console.log(`id: ${contest}`);
+  var user = getParameterByName("user");
+  // console.log(`id: ${contest}`);
   const { isLoading, submissions} = useSelector((state) => state.submissions);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getSubmissionsByContest(contest));
+    if (contest){
+      dispatch(getSubmissionsByContest(contest));
+    } else if (user) {
+      dispatch(getSubmissionsByCreator(user));
+    }
   }, []);
   const classes = useStyles();
 
