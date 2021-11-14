@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Toolbar, Typography, Container, Grow, Grid, AppBar, TextField, Button, Paper, Avatar } from '@material-ui/core';
+import { Toolbar, Typography, Container, Grow, Grid, AppBar, TextField, Button, Paper, Avatar, IconButton} from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
@@ -30,12 +31,15 @@ const Profile = () => {
   return (
     <Grow in>
       <Grid container direction="row" spacing={4} justifyContent="center" alignItems="center">
-        <Grid item sm={12} md={5} justifyContent="center" alignItems="center">
+        <Grid item sm={12} md={5}>
           <Paper style={{ padding: '72px', borderRadius: '15px', backgroundColor:'#FEF7CE', height: '70vh'}} elevation={0}>
-            <Avatar alt="Avatar" src={userAvatar} style={{left:"22%", height: "15em", width: "15em"}}/>
+            <Grid container direction="row" justifyContent="center" alignItems="center">
+              <Grid item>
+                <Avatar alt="Avatar" src={user?.result?.imgurl} style={{height: "15em", width: "15em"}}/>
+              </Grid>
+            </Grid>
             <Typography style={{ fontWeight: 600, textAlign:'center', marginTop: '50px'}} variant="h3" component="h2">{user?.result?.name}</Typography>
             <Typography style={{ fontWeight: 400, textAlign:'center', marginTop: '30px'}} variant="h5" component="h4">{user?.result?.email}</Typography>
-            <Typography style={{ fontWeight: 400, textAlign:'center', marginTop: '50px'}} variant="h5" component="h3">{user?.result?.description}</Typography>
           </Paper>
         </Grid>
         <Grid item sm={12} md={7}>
