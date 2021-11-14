@@ -42,10 +42,6 @@ const Home = () => {
   console.log(`user ${curUser}`);
   const [user, setUser] = useState(curUser);
 
-  // useEffect(() => {
-  //   setUser(curUser);
-  // }, [curUser])
-
   useEffect(() => {
     dispatch(getRecentContests());
   }, []);
@@ -54,9 +50,10 @@ const Home = () => {
     let ms = started? new Date(contests[0]?.endDate) - new Date() : new Date(contests[0]?.startDate) - new Date();
     if (ms < 0) {
       setStarted(true);
+      setUcStartDate(0);
+    } else {
+      setUcStartDate(mssecondsToTime(ms));
     }
-    setUcStartDate(mssecondsToTime(ms));
-    // console.log(user);
   }
 
   const mssecondsToTime = (secs) => {
@@ -134,7 +131,7 @@ const Home = () => {
             <Typography style={{ fontWeight: 600, textAlign:'center', marginTop: '30px'}} variant="h1" component="h2">{ucStartDate.h}h {ucStartDate?.m}m {ucStartDate?.s}s</Typography>}
             <Grid style={{ marginTop: '30px', textAlign:'center' }}>
               {started ? <Button variant="contained" size="large" color="primary" 
-              onClick={updateContestInfo} component={Link} to={`/contest/${contests[0]?._id}`} 
+              onClick={updateContestInfo} component={Link} to={curUser == null ? `/auth` : `/contest/${contests[0]?._id}`} 
               disableElevation style={{ backgroundColor: '#82B36F', fontSize:"26px", height: '2.5em',}}>Register Now</Button> : null}
               <Button variant="contained" size="large" color="primary" disableElevation onClick={handleClickViewRules} 
                       style={{ backgroundColor: '#FFF', color: '#000', marginLeft:'30px', fontSize:"26px", height: '2.5em', width:"5.5em"}}

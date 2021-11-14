@@ -15,6 +15,15 @@ import { createSubmission } from '../../actions/submission';
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
+
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
+
 const Recipe = ({contest, recipe}) => {
   const user = JSON.parse(localStorage.getItem('profile'));
   const classes = useStyles();
@@ -84,7 +93,6 @@ const Recipe = ({contest, recipe}) => {
   }
 
   const handleCloseAddSubmission = () => {
-    // setSubmData({title: '', message: '', selectedFile: ''});
     setSubmissionOpen(false);
   }
 
@@ -94,8 +102,8 @@ const Recipe = ({contest, recipe}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(submData);
     dispatch(createSubmission({...submData, creator: user?.result?._id, contest: contest?._id}, history, contest));
+    handleCloseAddSubmission();
   };
 
   return (
