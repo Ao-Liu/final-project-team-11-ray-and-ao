@@ -36,10 +36,6 @@ const Contest = () => {
   const [prize1, setPrize1] = useState("$10");
   const history = useHistory();
 
-  const handleAddChip = (tag) => setTags([...tags, tag]);
-
-  const handleDeleteChip = (chipToDelete) => setTags(tags.filter((tag) => tag !== chipToDelete));
-
   return (
     isLoading ? <CircularProgress /> : <Grow in>
       <Grid container direction="row" spacing={4} justifyContent="center" alignItems="center">

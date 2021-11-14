@@ -6,7 +6,7 @@ export default (state = { isLoading: true, submissions: []}, action) => {
       return { ...state, isLoading: true };
     case 'END_LOADING':
       return { ...state, isLoading: false };
-    case CREATE:
+    case 'CREATE_SUBMISSION':
       return { ...state, submissions: [...state.submissions, action.payload] };
     case UPDATE:
       return { ...state, submissions: state.submissions.map((submissions) => (submissions._id === action.payload._id ? action.payload : submissions)) };

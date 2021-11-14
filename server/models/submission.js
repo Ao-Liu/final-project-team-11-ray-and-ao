@@ -8,7 +8,8 @@ const submissionSchema = mongoose.Schema({
         type: Date,
         default: new Date(),
     },
-    contest: String
+    contest: String,
+    message: String
 })
 
 var Submission = mongoose.model('Submission', submissionSchema);

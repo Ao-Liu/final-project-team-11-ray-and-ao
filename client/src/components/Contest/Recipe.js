@@ -16,6 +16,7 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 const Recipe = ({contest, recipe}) => {
+  const user = JSON.parse(localStorage.getItem('profile'));
   const classes = useStyles();
   const query = useQuery();
   const page = query.get('page') || 1;
@@ -25,10 +26,25 @@ const Recipe = ({contest, recipe}) => {
   const [search, setSearch] = useState('');
   const [tags, setTags] = useState([]);
   const history = useHistory();
-  const [ingredients, setIngredients] = useState(["Puff Pastry"]);
-  const [ingMesures, setIngMesures] = useState(["320g"]);
-  const [submData, setSubmData] = useState({ title: '', message: '', tags: [], selectedFile: '' });
-  const [rulesOpen, setRulesOpen] = React.useState(false);
+  const [submData, setSubmData] = useState({ title: '', message: '', selectedFile: '' });
+  const [rulesOpen, setRulesOpen] = useState(false);
+  const [submissionOpen, setSubmissionOpen] = useState(false);
+
+  const [titleText, setTitleText] = useState("");
+  const [descriptionText, setDescriptionText] = useState("");
+  const [titleErrorText, setTitleErrorText] = useState("");
+
+  const changeTitleValue = (e) => {
+    const value = e.target.value;
+    console.log(value);
+    setSubmData({...submData, title: value});
+  }
+
+  const changeDescriptionValue = (e) => {
+    const value = e.target.value;
+    console.log(value);
+    setSubmData({...submData, message: value});
+  }
   const { id } = useParams();
 
   const [ucStartDate, setUcStartDate] = useState([]);
@@ -61,6 +77,7 @@ const Recipe = ({contest, recipe}) => {
   }
 
   const handleCloseViewRules = () => {
+    console.log(submData);
     setRulesOpen(false);
   }
 
@@ -68,33 +85,68 @@ const Recipe = ({contest, recipe}) => {
     setRulesOpen(true);
   }
 
+  const handleCloseAddSubmission = () => {
+    // setSubmData({title: '', message: '', selectedFile: ''});
+    setSubmissionOpen(false);
+  }
+
+  const handleClickAddSubmission = () => {
+    setSubmissionOpen(true);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let newSub = {"title":"Check out this Chinon Apple Tarts that I cooked in 2 hours",
-    "selectedFile":"",
-    "creator":"618707539f0d4220d553e466",
-    "contest":"618b1e3e40baa84fadca8a5d"}
-    dispatch(createSubmission(newSub, history))
-    clear();
-  };
-
-  const clear = () => {
-    setCurrentId(0);
-    setSubmData({ title: '', message: '', tags: [], selectedFile: '' });
+    // setSubmData({title: titleText, selectedFile: "", message: descriptionText});
+    console.log(submData);
+    dispatch(createSubmission({...submData, creator: user?.result?._id, contest: contest?._id}, history));
+    window.location.reload();
   };
 
   return (
     <Grow in>
         <Paper style={{ padding: '2vh 3vh 8vh 3vh', borderRadius: '15px', backgroundColor:'#DFF9FF', height: '74vh'}} elevation={0}>
+            <Grid>
+              <Dialog
+                open={submissionOpen}
+                onClose={handleCloseAddSubmission}>
+                <DialogTitle id="alert-dialog-title">
+                  Add Submission
+                </DialogTitle>
+                <DialogContent>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="title"
+                    label="Title"
+                    type="text"
+                    fullWidth
+                    variant="standard"
+                    defaultValue={submData.title}
+                    onChange={e => changeTitleValue(e)}
+                  />
+                  <TextField
+                    margin="dense"
+                    id="description"
+                    label="Description"
+                    type="text"
+                    fullWidth
+                    variant="standard"
+                    onChange={e => changeDescriptionValue(e)}
+                  />
+                  <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setSubmData({ ...submData, selectedFile: base64 })} /></div>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleCloseAddSubmission} autoFocus> Close </Button>
+                  <Button onClick={handleSubmit} autoFocus> Submit </Button>
+                </DialogActions>
+              </Dialog>
+            </Grid>
             <Grid container direction="row" justifyContent="center" >
-                <Grid item xs={12} md={8}>
+                <Grid item xs={12} md={9}>
                   <Typography style={{ fontWeight: 600 }} variant="h3" component="h3">{contest?.name} #{contest?.number}</Typography>
                 </Grid>
-                <Grid item xs={12} md={2}>
-                  <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setSubmData({ ...submData, selectedFile: base64 })} /></div>
-                </Grid>
-                <Grid item xs={12} md={2}>
-                  <Button variant="contained" size="large" color="primary" onClick={handleSubmit} disableElevation style={{  backgroundColor: '#173A56', margin: '10px 20px', }}>Submit</Button> 
+                <Grid item xs={12} md={3}>
+                  <Button variant="contained" size="large" color="primary" onClick={handleClickAddSubmission} disableElevation style={{  backgroundColor: '#173A56', margin: '10px 20px', }}>Add Submission</Button> 
                 </Grid>
             </Grid>
             <Grid container justifyContent="space-evenly" alignItems="center" style={{ marginTop: "30px"}}>

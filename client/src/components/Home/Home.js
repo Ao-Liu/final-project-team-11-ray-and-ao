@@ -120,12 +120,12 @@ const Home = () => {
             <Grid style={{ marginTop: '30px', textAlign:'center' }}>
               {started ? <Button variant="contained" size="large" color="primary" 
               onClick={updateContestInfo} 
-              disableElevation style={{ backgroundColor: '#82B36F', fontSize:"32px", height: '1.5em', width:"5em" }}>Register Now</Button> : 
+              disableElevation style={{ backgroundColor: '#82B36F', fontSize:"26px", height: '2.5em', width:"5.5em"}}>Register Now</Button> : 
               <Button variant="contained" size="large" color="primary" 
               onClick={updateContestInfo} 
-              disableElevation style={{ backgroundColor: '#82B36F', fontSize:"32px", height: '1.5em', width:"5em"}}>Preview</Button>}
+              disableElevation style={{ backgroundColor: '#82B36F', fontSize:"26px", height: '2.5em', width:"5.5em"}}>Preview</Button>}
               <Button variant="contained" size="large" color="primary" disableElevation onClick={handleClickViewRules} 
-                      style={{ backgroundColor: '#FFF', color: '#000', marginLeft:'30px', fontSize:"32px", height: '1.5em', width:"5em"}}
+                      style={{ backgroundColor: '#FFF', color: '#000', marginLeft:'30px', fontSize:"26px", height: '2.5em', width:"5.5em"}}
                       >Rules</Button> 
             </Grid>
           </Paper>
@@ -152,7 +152,7 @@ const Home = () => {
                                   size="large" 
                                   color="primary" 
                                   disableElevation 
-                                  style={{ fontSize:"32px", backgroundColor: '#82B36F', height: '1.5em', width:"5em", color: '#FFF', marginLeft:'30px', marginTop: '30px' }}
+                                  style={{ fontSize:"26px", backgroundColor: '#82B36F', height: '2.5em', width:"5.5em", color: '#FFF', marginLeft:'30px', marginTop: '30px' }}
                                   >Review</Button>  
                         </Grid>
                       </Grid>
@@ -184,7 +184,7 @@ const Home = () => {
                                 variant="contained" size="large" 
                                 color="primary" 
                                 disableElevation 
-                                style={{ fontSize:"32px", backgroundColor: '#82B36F', height: '1.5em', width:"5em", color: '#FFF', marginLeft:'30px', marginTop: '30px' }}
+                                style={{ fontSize:"26px", backgroundColor: '#82B36F', height: '2.5em', width:"5.5em", color: '#FFF', marginLeft:'30px', marginTop: '30px' }}
                                 >Review</Button> 
                         </Grid>
                       </Grid>
