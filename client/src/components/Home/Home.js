@@ -97,7 +97,7 @@ const Home = () => {
               <DialogContentText id="alert-dialog-description">
                 Contest Organizer: {contests[0]?.creator} <br/><br/>
                 Rules: {contests[0]?.rules} <br/><br/>
-                Prize: {contests[0]?.prize.map((p) => `${p } `)}
+                Prize: {contests[0]?.prize.map((p) => `${p === "" ? p : `${p}, `} `)}
               </DialogContentText>
             </DialogContent>
             <DialogActions>
@@ -106,7 +106,11 @@ const Home = () => {
           </Dialog>
         </Grid>
         <Grid item xs={12} md={3}>
-          <img src={medal} height="350em"/>
+          <Grid container justifyContent="center" alignItems="center">
+            <Grid item>
+              <img src={medal} height="350em"/>
+            </Grid>
+          </Grid>
         </Grid>
         <Grid item xs={12} md={9}>
           <Paper className={classes.holder}  style={{ padding: '72px', borderRadius: '15px', backgroundColor:'#FEF7CE'}} elevation={0}>
@@ -116,11 +120,13 @@ const Home = () => {
             <Grid style={{ marginTop: '30px', textAlign:'center' }}>
               {started ? <Button variant="contained" size="large" color="primary" 
               onClick={updateContestInfo} 
-              disableElevation style={{ backgroundColor: '#82B36F' }}>Register Now</Button> : 
+              disableElevation style={{ backgroundColor: '#82B36F', fontSize:"32px", height: '1.5em', width:"5em" }}>Register Now</Button> : 
               <Button variant="contained" size="large" color="primary" 
               onClick={updateContestInfo} 
-              disableElevation style={{ backgroundColor: '#82B36F' }}>Preview</Button>}
-              <Button variant="contained" size="large" color="primary" disableElevation onClick={handleClickViewRules} style={{ backgroundColor: '#FFF', color: '#000', marginLeft:'30px' }}>View Rules</Button> 
+              disableElevation style={{ backgroundColor: '#82B36F', fontSize:"32px", height: '1.5em', width:"5em"}}>Preview</Button>}
+              <Button variant="contained" size="large" color="primary" disableElevation onClick={handleClickViewRules} 
+                      style={{ backgroundColor: '#FFF', color: '#000', marginLeft:'30px', fontSize:"32px", height: '1.5em', width:"5em"}}
+                      >Rules</Button> 
             </Grid>
           </Paper>
         </Grid>
@@ -141,7 +147,13 @@ const Home = () => {
                           <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '30px', marginLeft:'20px'}} variant="h2" component="h2">{recipes[1]?.data?.name}</Typography>
                         </Grid>
                         <Grid item>
-                          <Button component={Link} to={`/contest/${contests[1]?._id}`} variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#82B36F', color: '#FFF', marginLeft:'30px', marginTop: '30px' }}>Review</Button>  
+                          <Button component={Link} to={`/contest/${contests[1]?._id}`} 
+                                  variant="contained" 
+                                  size="large" 
+                                  color="primary" 
+                                  disableElevation 
+                                  style={{ fontSize:"32px", backgroundColor: '#82B36F', height: '1.5em', width:"5em", color: '#FFF', marginLeft:'30px', marginTop: '30px' }}
+                                  >Review</Button>  
                         </Grid>
                       </Grid>
                     </Grid>
@@ -167,7 +179,13 @@ const Home = () => {
                         <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '25px', marginLeft:'20px'}} variant="h2" component="h4">{recipes[2]?.data?.name}</Typography>
                         </Grid>
                         <Grid item>
-                        <Button component={Link} to={`/contest/${contests[2]?._id}`} variant="contained" size="large" color="primary" disableElevation style={{ backgroundColor: '#82B36F', color: '#FFF', marginLeft:'30px', marginTop: '30px' }}>Review</Button> 
+                        <Button component={Link} 
+                                to={`/contest/${contests[2]?._id}`} 
+                                variant="contained" size="large" 
+                                color="primary" 
+                                disableElevation 
+                                style={{ fontSize:"32px", backgroundColor: '#82B36F', height: '1.5em', width:"5em", color: '#FFF', marginLeft:'30px', marginTop: '30px' }}
+                                >Review</Button> 
                         </Grid>
                       </Grid>
                     </Grid>
