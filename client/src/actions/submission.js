@@ -8,8 +8,7 @@ export const createSubmission = (submission, history, contest) => async (dispatc
       contest.submissions = [...contest.submissions, data._id];
       const { data2 } = await api.updateContest(contest._id, contest);
       dispatch({ type: 'CREATE_SUBMISSION', payload: data});
-      history.push(`/submissions/${data._id}`); 
-      // dispatch({ type: 'UPDATE_CONTEST', payload: data2 });
+      // history.push(`/submissions/${data._id}`); 
       dispatch({ type: "REFRESH" });
     } catch (error) { 
       console.log(error);

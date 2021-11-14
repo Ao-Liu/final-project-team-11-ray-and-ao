@@ -49,12 +49,10 @@ const Navbar = () => {
         <Button size="large" variant="text" component={Link} to="/" className={classes.touchBarBtn} color="primary" style={{ backgroundColor: 'transparent' }} >Home</Button>
         <Button variant="text" size="large" component={Link} to="/profile" className={classes.touchBarBtn} color="primary" onClick={navProfile} style={{ backgroundColor: 'transparent' }} >Profile</Button>
         <Button variant="text" size="large" component={Link} to="/pro" className={classes.touchBarBtn} color="primary" onClick={navProfile} style={{ backgroundColor: 'transparent' }}  >Pro</Button> 
-        {/* <Button variant="text" size="large" component={Link} to="/pro" className={classes.touchBarBtn} color="primary" onClick={navProfile} style={{ backgroundColor: 'transparent' }}  >New Contest</Button>  */}
       </Toolbar>  : <Toolbar className={classes.btnGrp}/>}
       <Toolbar className={classes.toolbar}>
         {user?.result ? (
           <div className={classes.profile}>
-            {/* <Avatar className={classes.purple} alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.name.charAt(0)}</Avatar> */}
             <Typography className={classes.userName} variant="h6">Hi, {user?.result.name}!</Typography>
             <Button variant="contained" className={classes.logout} color="primary" onClick={logout} disableElevation style={{ backgroundColor: '#E1315A'}}>Logout</Button>
           </div>

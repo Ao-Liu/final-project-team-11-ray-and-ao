@@ -15,7 +15,6 @@ export const getContest = () => async (dispatch) => {
 export const getContestById = (id) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
-
     const data = await api.fetchContestById(id);
     const recipeData = await api.fetchRecipe(data.data.recipe);
     dispatch({ type: FETCH_ONE_CONTEST, payload: { contest: data } });
