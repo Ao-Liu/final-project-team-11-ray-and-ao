@@ -15,4 +15,24 @@ export const createSubmission = async (req, res) => {
     }
 }
 
+export const deleteSubmission = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No submission with id: ${id}`);
+
+    await Submission.findByIdAndRemove(id);
+
+    res.json({ message: "Submission deleted successfully." });
+}
+
+export const getSubmissionsByContest = async (req, res) => {
+    const {contest} = req.query;
+    try {
+        const subs = await Submission.find({contest}).sort({ _id: -1 });
+        res.json({ data: subs });
+    } catch (error) {    
+        res.status(404).json({ message: error.message });
+    }
+}
+
 export default router;

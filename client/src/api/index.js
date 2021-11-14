@@ -29,3 +29,6 @@ export const updateContest = (id, contest) => API.patch(`/contest/${id}`, contes
 export const fetchRecentContest = () => API.get('/home/recent');
 export const fetchRecipe = (id) => API.get(`/recipe/${id}`);
 export const createSubmission = (newSubmission) => API.post(`/submissions`, newSubmission);
+export const deleteSubmission = (id) => API.delete(`/submissions/${id}`);
+export const fetchSubmissions = () => API.get(`/submissions`);
+export const fetchSubmissionsByContest = (contest) => API.get(`/submissions?contest=${contest}`);

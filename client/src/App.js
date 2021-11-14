@@ -28,7 +28,7 @@ const App = () => {
           <Route path="/pro" exact component={Pro} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/posts/:id" exact component={PostDetails} />
-          <Route path="/submission" exact component={Submission} />
+          <Route path="/submissions" exact component={Submissions} />
           <Route path={['/creators/:name', '/tags/:name']} component={CreatorOrTag} />
           <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/home" />)} />
         </Switch>
