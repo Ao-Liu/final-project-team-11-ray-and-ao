@@ -81,7 +81,7 @@ const Contest = () => {
             </Grid>
         </Grid>
         <Grid item sm={12} md={9}>
-            <Recipe contest={contests.data} recipe={recipes[0].data}/>
+            <Recipe contest={contests?.data} recipe={recipes[0]?.data}/>
         </Grid>
       </Grid>
     </Grow>

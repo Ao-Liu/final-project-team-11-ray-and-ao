@@ -24,7 +24,6 @@ const Pro = () => {
   const [currentId, setCurrentId] = useState(0);
   let tmp = user?.result?.isPro === "true" ? true : false
   const [isPro, setIsPro] = useState(tmp)
-  console.log(JSON.stringify(user.result));
   const dispatch = useDispatch();
 
   const [search, setSearch] = useState('');
@@ -35,7 +34,6 @@ const Pro = () => {
     user.result.isPro = "true";
     setIsPro(true)
     localStorage.setItem('profile', JSON.stringify(user));
-    console.log(JSON.stringify(user.result));
     dispatch(subscribePro(user.result));
   }
 
@@ -60,38 +58,48 @@ const Pro = () => {
               <Grid item md={5}/>
             </Grid>
             <Grid container >
-              <Grid item md={12}>
+              <Grid item xs={12}>
                 <Grid container>
+                <Grid item md={3}/>
                   <Grid item md={1}>
-                    <Check style={{ marginLeft:"140px", marginTop: '30px'}}/>
+                    <Check style={{ marginTop: '30px'}}/>
                   </Grid>
-                  <Grid item md={11}>
-                    <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">Sign up for official contests</Typography>
+                  <Grid item md={8}>
+                    <Typography style={{ fontWeight: 400, textAlign:'left', marginTop: '30px'}} variant="h5" component="h4">Sign up for official contests</Typography>
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item md={12}>
+              <Grid item xs={12} >
                 <Grid container>
+                <Grid item md={3}/>
                   <Grid item md={1}>
-                    <Check style={{ marginLeft:"140px", marginTop: '30px'}}/>
+                    <Check style={{ marginTop: '30px'}}/>
                   </Grid>
-                  <Grid item md={11}>
-                    <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">Claim Prizes</Typography>
+                  <Grid item md={8}>
+                    <Typography style={{ fontWeight: 400, textAlign:'left', marginTop: '30px'}} variant="h5" component="h4">Claim Prizes</Typography>
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item md={12}>
+              <Grid item xs={12}>
                 <Grid container>
+                  <Grid item md={3}/>
                   <Grid item md={1}>
-                    <Check style={{ marginLeft:"140px", marginTop: '30px'}}/>
+                    <Check style={{ marginTop: '30px'}}/>
                   </Grid>
-                  <Grid item md={11}>
-                    <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">View 50,000+ recipes</Typography>
+                  <Grid item md={8}>
+                    <Typography style={{ fontWeight: 400, textAlign:'left', marginTop: '30px'}} variant="h5" component="h4">View 50,000+ recipes</Typography>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs={12}>
+                <Grid container justifyContent="center" alignItems="center">
+                  <Grid item>
+                    <Button variant="contained" color="primary" disabled={true} disableElevation style={{ marginTop: '60px', fontSize:"40px", height: '3em', width:"7em", backgroundColor: '#173A56', color: '#FFF' }}>Subscribed</Button>
                   </Grid>
                 </Grid>
               </Grid>
             </Grid>
-            <Button variant="contained" color="primary" disabled={true} disableElevation style={{ marginTop: '60px', left: "32%",fontSize:"40px", height: '3em', width:"7em", backgroundColor: '#173A56', color: '#FFF' }}>Subscribed</Button>
+            
           </Paper>
         </Grid>
         <Grid item sm={12} md={6}>
@@ -108,38 +116,47 @@ const Pro = () => {
               <Grid item md={5}/>
             </Grid>
             <Grid container>
-              <Grid item md={12}>
+              <Grid item xs={12}>
                 <Grid container>
+                  <Grid item md={3}/>
                   <Grid item md={1}>
-                    <Check style={{ marginLeft:"140px", marginTop: '30px'}}/>
+                    <Check style={{ marginTop: '30px'}}/>
                   </Grid>
-                  <Grid item md={11}>
-                    <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">Make your personal contests</Typography>
+                  <Grid item md={8}>
+                    <Typography style={{ fontWeight: 400, textAlign:'left', marginTop: '30px'}} variant="h5" component="h4">Make your personal contests</Typography>
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item md={12}>
+              <Grid item xs={12}>
                 <Grid container>
+                  <Grid item md={3}/>
                   <Grid item md={1}>
-                    <Check style={{ marginLeft:"140px", marginTop: '30px'}}/>
+                    <Check style={{ marginTop: '30px'}}/>
                   </Grid>
-                  <Grid item md={11}>
-                    <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">Customized rules</Typography>
+                  <Grid item md={8}>
+                    <Typography style={{ fontWeight: 400, textAlign:'left', marginTop: '30px'}} variant="h5" component="h4">Customized rules</Typography>
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item md={12}>
+              <Grid item xs={12}>
                 <Grid container>
+                  <Grid item md={3}/>
                   <Grid item md={1}>
-                    <Check style={{ marginLeft:"140px", marginTop: '30px'}}/>
+                    <Check style={{ marginTop: '30px'}}/>
                   </Grid>
-                  <Grid item md={11}>
-                    <Typography style={{ fontWeight: 400, textAlign:'left', marginLeft:"140px", marginTop: '30px'}} variant="h5" component="h4">Help us improve!</Typography>
+                  <Grid item md={8}>
+                    <Typography style={{ fontWeight: 400, textAlign:'left', marginTop: '30px'}} variant="h5" component="h4">Help us improve!</Typography>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs={12}>
+                <Grid container justifyContent="center" alignItems="center">
+                  <Grid item>
+                  <Button variant="contained" color="primary" onClick={handleSubscribe} disabled={isPro} disableElevation style={{ marginTop: '60px',fontSize:"40px", height: '3em', width:"7em",backgroundColor: '#74B666',  color: '#FFF' }}>{isPro ? "Subscribed" : "Upgrade"}</Button>
                   </Grid>
                 </Grid>
               </Grid>
             </Grid>
-            <Button variant="contained" color="primary" onClick={handleSubscribe} disabled={isPro} disableElevation style={{ marginTop: '60px', left: "32%",fontSize:"40px", height: '3em', width:"7em",backgroundColor: '#74B666',  color: '#FFF' }}>{isPro ? "Subscribed" : "Upgrade"}</Button>
           </Paper>
         </Grid>
       </Grid>
