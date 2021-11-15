@@ -1,4 +1,4 @@
-import { CREATE, START_LOADING, END_LOADING } from '../constants/actionTypes';
+import {  START_LOADING, END_LOADING } from '../constants/actionTypes';
 import * as api from '../api/index.js';
 
 export const createSubmission = (submission, history, contest) => async (dispatch) => {

@@ -1,4 +1,4 @@
-import { FETCH_CONTEST, CREATE,FETCH_ONE_CONTEST, UPDATE, DELETE, FETCH_RECENT_CONTEST, FETCH_RECIPE } from '../constants/actionTypes';
+import { FETCH_CONTEST, CREATE,FETCH_ONE_CONTEST, DELETE, FETCH_RECENT_CONTEST, FETCH_RECIPE } from '../constants/actionTypes';
 
 export default (state = { isLoading: true, contests: [], recipes: [] }, action) => {
   switch (action.type) {

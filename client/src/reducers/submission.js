@@ -1,4 +1,4 @@
-import { CREATE, UPDATE, DELETE } from '../constants/actionTypes';
+import { UPDATE} from '../constants/actionTypes';
 
 export default (state = { isLoading: true, submissions: []}, action) => {
   switch (action.type) {

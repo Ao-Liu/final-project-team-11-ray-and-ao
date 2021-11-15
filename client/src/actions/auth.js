@@ -27,7 +27,8 @@ export const signup = (formData, router) => async (dispatch) => {
 
 export const subscribePro = (user) => async (dispatch) => {
   try {
-    const { data } = await api.updateUser(user._id, user);
+    await api.updateUser(user._id, user);
+    
   } catch (error) {
     console.log(error);
   }

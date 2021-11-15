@@ -1,16 +1,9 @@
-import React, { useState } from 'react';
-import { Toolbar, Typography, Container, Grow, Grid, AppBar, TextField, Button, Paper, Avatar, IconButton} from '@material-ui/core';
+import React from 'react';
+import { Typography, Grow, Grid, Button, Paper, Avatar} from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation , Link } from 'react-router-dom';
-import ChipInput from 'material-ui-chip-input';
-import userAvatar from '../../images/user.png';
 import possessionImg from '../../images/possession.png'
-import { getPostsBySearch } from '../../actions/posts';
-import Posts from '../Posts/Posts';
-import Form from '../Form/Form';
-import Pagination from '../Pagination';
-import useStyles from './styles';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -24,14 +17,6 @@ const Profile = () => {
     userId = user?.result?._id
   }
   const dispatch = useDispatch();
-  
-  const classes = useStyles();
-  const query = useQuery();
-  const page = query.get('page') || 1;
-  const searchQuery = query.get('searchQuery');
-
-  const [currentId, setCurrentId] = useState(0);
-
   const history = useHistory();
 
   return (
