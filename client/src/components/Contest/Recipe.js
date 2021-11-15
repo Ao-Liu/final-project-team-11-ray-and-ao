@@ -139,7 +139,7 @@ const Recipe = ({contest, recipe}) => {
 
   return (
     <Grow in>
-        <Paper style={{ padding: '2vh 3vh 8vh 3vh', borderRadius: '15px', backgroundColor:'#DFF9FF', height: '74vh'}} elevation={0}>
+        <Paper style={{ padding: '4vh 3vh 8vh 3vh', borderRadius: '15px', backgroundColor:'#DFF9FF', height: '74vh'}} elevation={0}>
             <Grid>
               <Snackbar
                 open={openSnack}
@@ -237,8 +237,6 @@ const Recipe = ({contest, recipe}) => {
                   <Typography style={{ fontWeight: 600 }} variant="h3" component="h3">{contest?.name} #{contest?.number}</Typography>
                 </Grid>
                 <Grid item xs={12} md={3}>
-                  {/* {!ended? <Button variant="contained" size="large" color="primary" onClick={handleClickAddSubmission} disableElevation style={{ backgroundColor: '#173A56', margin: '10px 20px' }}>Add Submission</Button>
-                  : <Button variant="contained" component={Link} to={`/submissions?contest=${contest?._id}`} size="large" color="primary" disableElevation style={{ backgroundColor: '#173A56', margin: '10px 20px' }}>View All Submissions</Button>}  */}
                   <ActionButton date={contest?.endDate} cid={!ended ? "" : contest?._id} handleClickAddSubmission={handleClickAddSubmission}/>
                 </Grid>
             </Grid>

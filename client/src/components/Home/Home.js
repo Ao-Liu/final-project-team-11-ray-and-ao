@@ -130,7 +130,7 @@ const Home = () => {
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.holder} style={{ padding: '50px', borderRadius: '15px', height:"25vh", backgroundColor:'#EFEEFE',}} elevation={0}>
+          <Paper className={classes.holder} style={{ padding: '30px 50px 30px 50px', borderRadius: '15px', backgroundColor:'#EFEEFE',}} elevation={0}>
               <Grid container direction="column" spacing={2}>
                 <Grid item xs={12}>
                   <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">{contests[1]?.name} #{contests[1]?.number} review</Typography>
@@ -143,7 +143,7 @@ const Home = () => {
                     <Grid item xs={12} md={8}>
                       <Grid container direction="column" spacing={1} justifyContent="center" alignItems="center">
                         <Grid item>
-                          <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '30px', marginLeft:'20px'}} variant="h2" component="h2">{recipes[1]?.data?.name}</Typography>
+                          <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '30px', marginLeft:'20px'}} variant="h3" component="h3">{recipes[1]?.data?.name}</Typography>
                         </Grid>
                         <Grid item>
                           <Button component={Link} to={`/contest/${contests[1]?._id}`} 
@@ -162,7 +162,7 @@ const Home = () => {
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.holder} style={{padding: '50px', borderRadius: '15px', height:"25vh", backgroundColor:'#FAE4EC',}} elevation={0}>
+          <Paper className={classes.holder} style={{padding: '30px 50px 30px 50px', borderRadius: '15px', backgroundColor:'#FAE4EC',}} elevation={0}>
           <Grid container direction="column" spacing={2}>
                 <Grid item xs={12}>
                 <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h4" component="h2">{contests[2]?.name} #{contests[2]?.number} review</Typography>
@@ -175,7 +175,7 @@ const Home = () => {
                     <Grid item xs={12} md={8}>
                       <Grid container direction="column" spacing={1} justifyContent="center" alignItems="center">
                         <Grid item>
-                        <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '25px', marginLeft:'20px'}} variant="h2" component="h4">{recipes[2]?.data?.name}</Typography>
+                        <Typography style={{ fontWeight: 600, textAlign:'start', marginTop: '25px', marginLeft:'20px'}} variant="h3" component="h3">{recipes[2]?.data?.name}</Typography>
                         </Grid>
                         <Grid item>
                         <Button component={Link} 

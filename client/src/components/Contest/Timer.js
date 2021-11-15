@@ -48,7 +48,7 @@ const Timer = ({date}) => {
       <Grid container justifyContent="center" alignItems="center">
         {timerComponents}
       </Grid> : 
-      <Typography style={{ fontWeight: 600, textAlign:"right"}} variant="h3" component="h4">
+      <Typography style={{ fontWeight: 600, textAlign:"right"}} variant="h4" component="h4">
         Contest Ended
       </Typography>}
     </div>

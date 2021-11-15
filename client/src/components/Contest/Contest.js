@@ -57,7 +57,7 @@ const Contest = () => {
         <Grid item sm={12} md={3} >
             <Grid container direction="column" spacing={4} justifyContent="center">
                 <Grid item>
-                    <Paper style={{ padding: '12vh 5vh', borderRadius: '15px', backgroundColor:'#FEF7CE'}} elevation={0}>
+                    <Paper style={{ padding: '11vh 5vh', borderRadius: '15px', backgroundColor:'#FEF7CE'}} elevation={0}>
                         <Grid container>
                             <Grid item xs={6} sm={6} md={8}>
                                 <Typography style={{ fontWeight: 600}} variant="h3" component="h2">Prize</Typography>
@@ -94,7 +94,7 @@ const Contest = () => {
                     </Paper>
                 </Grid>
                 <Grid item>
-                    <Paper style={{ padding: '10vh 5vh', borderRadius: '15px', backgroundColor:'#EFEEFE'}} elevation={0}>
+                    <Paper style={{ padding: '14vh 5vh', borderRadius: '15px', backgroundColor:'#EFEEFE'}} elevation={0}>
                         <Grid container direction='row' style={{ textAlign:'center' }}>
                             <Typography style={{ fontWeight: 600}} variant="h4" component="h4">Rules</Typography>
                             <Button variant="contained" size="large" color="primary" onClick={handleClickViewRules} disableElevation style={{ backgroundColor: '#82B36F', color: '#FFF', marginLeft:'20px' }}>View</Button> 
