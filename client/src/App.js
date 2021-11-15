@@ -3,6 +3,7 @@ import { Container } from '@material-ui/core';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import PostDetails from './components/PostDetails/PostDetails';
+import SubmDetails from './components/SubmDetails/SubmDetails';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
 import Pro from './components/Pro/Pro'
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/pro" exact component={Pro} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/posts/:id" exact component={PostDetails} />
+          <Route path="/submissions/:id" exact component={SubmDetails} />
           <Route path="/submissions" exact component={Submissions} />
           <Route path={['/creators/:name', '/tags/:name']} component={CreatorOrTag} />
           <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/home" />)} />

@@ -43,7 +43,16 @@ export const getSubmissionsByQuery = async (req, res) => {
             res.status(404).json({ message: error.message });
         }
     }
-    
+}
+
+export const getSubmissionById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const submission = await Submission.findById(id);
+        res.status(200).json(submission);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
 }
 
 export default router;

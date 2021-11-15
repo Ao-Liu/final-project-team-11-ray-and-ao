@@ -4,7 +4,7 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
-import { deleteSubmission } from '../../actions/submission';
+import { deleteSubmission, getSubmissionById } from '../../actions/submission';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { useHistory , Link } from 'react-router-dom';
@@ -19,12 +19,12 @@ const Submission = ({ submission }) => {
 
   const userId = user?.result?.googleId || user?.result?._id;
 
-  // const openPost = (e) => {
-  //   // dispatch(getPost(post._id, history));
+  const openSubmission = (e) => {
+    history.push(`/submissions/${submission?._id}`);
+  };
 
-  //   history.push(`/posts/${post._id}`);
-  // };
   let date = new Date(submission?.createdAt);
+  console.log(`submission id ${submission?._id}`);
 
   return (
     <Card className={classes.card} raised elevation={2} >
@@ -32,7 +32,7 @@ const Submission = ({ submission }) => {
         component="span"
         name="test"
         className={classes.cardAction}
-        onClick={null}
+        onClick={openSubmission}
       >
         <CardMedia className={classes.media} image={submission?.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={submission?.title}/>
         <div className={classes.overlay}>

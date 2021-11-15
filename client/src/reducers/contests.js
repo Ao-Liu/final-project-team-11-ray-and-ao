@@ -9,7 +9,7 @@ export default (state = { isLoading: true, contests: [], recipes: [] }, action) 
     case FETCH_CONTEST:
       return { ...state, contests: action.payload.contest };
     case FETCH_ONE_CONTEST:
-      return { ...state, contests: action.payload.contest};
+      return { ...state, contests: action.payload.contest };
     case FETCH_RECENT_CONTEST:
       return { ...state, contests: action.payload.contest };
     case FETCH_RECIPE:

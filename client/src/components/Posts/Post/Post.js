@@ -40,13 +40,11 @@ const Post = ({ post, setCurrentId }) => {
           <><ThumbUpAltOutlined fontSize="small" />&nbsp;{likes.length} {likes.length === 1 ? 'Like' : 'Likes'}</>
         );
     }
-
     return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
   };
 
   const openPost = (e) => {
     // dispatch(getPost(post._id, history));
-
     history.push(`/posts/${post._id}`);
   };
 

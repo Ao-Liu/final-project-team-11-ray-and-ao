@@ -30,6 +30,7 @@ export const fetchRecentContest = () => API.get('/home/recent');
 export const fetchRecipe = (id) => API.get(`/recipe/${id}`);
 export const createSubmission = (newSubmission) => API.post(`/submissions`, newSubmission);
 export const deleteSubmission = (id) => API.delete(`/submissions/${id}`);
+export const fetchSubmissionById = (id) => API.get(`/submissions/${id}`)
 export const fetchSubmissions = () => API.get(`/submissions`);
 export const fetchSubmissionsByContest = (contest) => API.get(`/submissions?contest=${contest}`);
 export const fetchSubmissionsByCreator = (creator) => API.get(`/submissions?creator=${creator}`);
