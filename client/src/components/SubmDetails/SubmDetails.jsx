@@ -52,7 +52,7 @@ const Subm = () => {
             </Link>
           ))}
           </Typography> */}
-          <Typography gutterBottom variant="body1" component="p">{submission?.message}</Typography>
+          <Typography style={{ fontWeight: 400, marginTop: '10px', marginBottom: '10px' }} variant="h4" component="h3" component="p">{submission?.message}</Typography>
           <Typography variant="h6">
             Created by:
             <Link to={`/submissions?user=${submission?.creator}`} style={{ textDecoration: 'none', color: '#3f51b5' }}>
