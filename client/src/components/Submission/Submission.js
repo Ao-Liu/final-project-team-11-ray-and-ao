@@ -3,6 +3,7 @@ import { Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBa
 import DeleteIcon from '@material-ui/icons/Delete';
 import { deleteSubmission } from '../../actions/submission';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
 import { useHistory , Link } from 'react-router-dom';
 
 import useStyles from './styles';
@@ -19,7 +20,6 @@ const Submission = ({ submission }) => {
     history.push(`/submissions/${submission?._id}`);
   };
 
-  let date = new Date(submission?.createdAt);
   console.log(`submission id ${submission?._id}`);
 
   return (
@@ -33,7 +33,7 @@ const Submission = ({ submission }) => {
         <CardMedia className={classes.media} image={submission?.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={submission?.title}/>
         <div className={classes.overlay}>
           <Typography variant="h4">{submission?.creatorName}</Typography>
-          <Typography variant="body2">{date?.getFullYear()}/{date?.getMonth()}/{date?.getDate()} {date?.toTimeString().split(' ')[0]}</Typography>
+          <Typography variant="body2">{moment(submission?.createdAt).fromNow()}</Typography>
         </div>
         <Typography className={classes.title} gutterBottom variant="h5" component="h2">{submission?.title}</Typography>
         <CardContent>
