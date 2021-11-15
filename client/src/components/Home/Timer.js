@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Grid } from '@material-ui/core';
+import { Typography, Grid, CircularProgress } from '@material-ui/core';
 import useStyles from './styles';
 import { mergeClasses } from "@material-ui/styles";
 
@@ -46,10 +46,7 @@ const Timer = ({date}) => {
   }
   return (
     <div>
-      {timerComponents.length ? <Grid container justifyContent="center" alignItems="center">{timerComponents}</Grid> : 
-         <Grid container justifyContent="center" alignItems="center">
-            <Typography style={{ fontWeight: 600, textAlign:'center', marginTop: '30px'}} variant="h1" component="h2">0h 0m 0s</Typography>
-        </Grid>}
+      {timerComponents.length > 1 ? <Grid container justifyContent="center" alignItems="center">{timerComponents}</Grid> : <CircularProgress/>}
     </div>
   );
 }
