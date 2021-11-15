@@ -74,7 +74,7 @@ const SignUp = () => {
                 message="Wrong credentials"
                 action={null}
               />
-      <Paper style={{ padding:"60px", borderRadius: '15px', backgroundColor:'#E7FFD4'}} className={classes.paper} elevation={0}>
+      <Paper style={{ padding:"60px", borderRadius: '15px', backgroundColor:'#FEF7CE'}} className={classes.paper} elevation={0}>
         <Typography style={{fontWeight: 600, marginBottom:"20px"}} component="h1" variant="h3">{ isSignup ? 'Sign up' : 'Sign in' }</Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
@@ -91,7 +91,7 @@ const SignUp = () => {
           <Button type="submit" fullWidth variant="contained" style={{fontSize:"18px", color: "#fff", backgroundColor:"#74B666", marginTop:"40px"}} className={classes.submit}>
             { isSignup ? 'Sign Up' : 'Sign In' }
           </Button>
-          <GoogleLogin
+          {/* <GoogleLogin
             clientId="564033717568-bu2nr1l9h31bhk9bff4pqbenvvoju3oq.apps.googleusercontent.com"
             render={(renderProps) => (
               <Button className={classes.googleButton} style={{fontSize:"18px", color: "#fff", backgroundColor:"#74B666", marginTop:"10px"}} fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
@@ -101,7 +101,7 @@ const SignUp = () => {
             onSuccess={googleSuccess}
             onFailure={googleError}
             cookiePolicy="single_host_origin"
-          />
+          /> */}
           <Grid containerjustify="flex-end">
             <Grid item>
               <Button style={{fontSize:"16px", marginTop:"40px"}} onClick={switchMode}>
