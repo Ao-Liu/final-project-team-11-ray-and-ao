@@ -5,7 +5,8 @@ import { useHistory, useLocation, useParams, Link } from 'react-router-dom';
 import FileBase from 'react-file-base64';
 import useStyles from './styles';
 import { createSubmission } from '../../actions/submission';
-
+import Timer from './Timer';
+import ActionButton from './ActionButton';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -240,8 +241,9 @@ const Recipe = ({contest, recipe}) => {
                   <Typography style={{ fontWeight: 600 }} variant="h3" component="h3">{contest?.name} #{contest?.number}</Typography>
                 </Grid>
                 <Grid item xs={12} md={3}>
-                  {!ended? <Button variant="contained" size="large" color="primary" onClick={handleClickAddSubmission} disableElevation style={{ backgroundColor: '#173A56', margin: '10px 20px' }}>Add Submission</Button>
-                  : <Button variant="contained" component={Link} to={`/submissions?contest=${contest?._id}`} size="large" color="primary" disableElevation style={{ backgroundColor: '#173A56', margin: '10px 20px' }}>View All Submissions</Button>} 
+                  {/* {!ended? <Button variant="contained" size="large" color="primary" onClick={handleClickAddSubmission} disableElevation style={{ backgroundColor: '#173A56', margin: '10px 20px' }}>Add Submission</Button>
+                  : <Button variant="contained" component={Link} to={`/submissions?contest=${contest?._id}`} size="large" color="primary" disableElevation style={{ backgroundColor: '#173A56', margin: '10px 20px' }}>View All Submissions</Button>}  */}
+                  <ActionButton date={contest?.endDate} cid={!ended ? "" : contest?._id} handleClickAddSubmission={handleClickAddSubmission}/>
                 </Grid>
             </Grid>
             <Grid container justifyContent="space-evenly" alignItems="center" style={{ marginTop: "30px"}}>
@@ -252,8 +254,7 @@ const Recipe = ({contest, recipe}) => {
                   <Typography style={{ fontWeight: 600, textAlign:"center"}} variant="h4" component="h4">{recipe?.fromArea}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} md={5}>
-                  {ended ? <Typography style={{ fontWeight: 600, textAlign:"right"}} variant="h3" component="h4">Contest Ended</Typography>
-                  : <Typography style={{ fontWeight: 600, textAlign:"right"}} variant="h3" component="h4">{ucStartDate?.h}h {ucStartDate?.m}m {ucStartDate?.s}s</Typography>}
+                  <Timer date={!ended ? contest?.endDate : "" }/>
                 </Grid>
             </Grid>
             <Grid container direction="row">

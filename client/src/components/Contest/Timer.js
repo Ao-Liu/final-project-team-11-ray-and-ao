@@ -15,6 +15,7 @@ const Timer = ({date}) => {
         s: Math.floor((difference / 1000) % 60),
       };
     }
+    // console.log(timeLeft);
     return timeLeft;
   };
 
@@ -29,7 +30,7 @@ const Timer = ({date}) => {
   const timerComponents = [];
   Object.keys(timeLeft).forEach((interval) => {
     timerComponents.push(
-      <Typography variant="h1" component="h2" className={classes.timer}>
+      <Typography variant="h4" component="h4" className={classes.timer}>
         {timeLeft[interval]}{interval}&nbsp;
       </Typography>
     );
@@ -43,7 +44,13 @@ const Timer = ({date}) => {
   }
   return (
     <div>
-      {timerComponents.length > 1 ? <Grid container justifyContent="center" alignItems="center">{timerComponents}</Grid> : <CircularProgress/>}
+      {timerComponents.length > 1 ? 
+      <Grid container justifyContent="center" alignItems="center">
+        {timerComponents}
+      </Grid> : 
+      <Typography style={{ fontWeight: 600, textAlign:"right"}} variant="h3" component="h4">
+        Contest Ended
+      </Typography>}
     </div>
   );
 }

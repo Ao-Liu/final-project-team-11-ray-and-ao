@@ -44,6 +44,7 @@ const Home = () => {
     } else {
       setUcStartDate(mssecondsToTime(ms));
     }
+    // console.log(ms);
   }
 
   const mssecondsToTime = (secs) => {
