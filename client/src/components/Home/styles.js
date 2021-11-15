@@ -17,4 +17,9 @@ export default makeStyles((theme) => ({
       flexDirection: 'column-reverse',
     },
   },
+  timer: {
+    fontWeight: 600, 
+    textAlign:'center', 
+    marginTop: '30px'
+  }
 }));

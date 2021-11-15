@@ -5,6 +5,7 @@ import { useHistory, useLocation, Link } from 'react-router-dom';
 import medal from '../../images/medal.png';
 import { getRecentContests, getRecipe } from '../../actions/contest'; 
 import useStyles from './styles';
+import Timer from './Timer';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -112,12 +113,11 @@ const Home = () => {
           </Grid>
         </Grid>
         <Grid item xs={12} md={9}>
-          <Paper className={classes.holder}  style={{ padding: '72px', borderRadius: '15px', backgroundColor:'#FEF7CE'}} elevation={0}>
+          <Paper className={classes.holder} style={{ padding: '72px', borderRadius: '15px', backgroundColor:'#FEF7CE'}} elevation={0}>
             {started ? <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h3" component="h2">{contests[0]?.name} #{contests[0]?.number} ENDS in</Typography> :
             <Typography style={{ fontWeight: 600, marginLeft: '10px' }} variant="h3" component="h2">{contests[0]?.name} #{contests[0]?.number} in</Typography>}
+            <Timer style={{ fontWeight: 600, textAlign:'center', marginTop: '30px'}} date={started ? contests[0]?.endDate : contests[0]?.startDate}/>
             <div style={{display:'none'}}>{setInterval(handleUpdateTime, 1000)}</div>
-            {started ? <Typography style={{ fontWeight: 600, textAlign:'center', marginTop: '30px'}} variant="h1" component="h2">{ucStartDate.h}h {ucStartDate?.m}m {ucStartDate?.s}s</Typography> : 
-            <Typography style={{ fontWeight: 600, textAlign:'center', marginTop: '30px'}} variant="h1" component="h2">{ucStartDate.h}h {ucStartDate?.m}m {ucStartDate?.s}s</Typography>}
             <Grid style={{ marginTop: '30px', textAlign:'center' }}>
               {started ? <Button variant="contained" size="large" color="primary" 
               onClick={updateContestInfo} component={Link} to={curUser == null ? `/auth` : `/contest/${contests[0]?._id}`} 
