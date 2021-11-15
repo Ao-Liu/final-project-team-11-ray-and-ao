@@ -55,4 +55,17 @@ export const getSubmissionById = async (req, res) => {
     }
 }
 
+export const commentSubmission = async (req, res) => {
+    const { id } = req.params;
+    const { value } = req.body;
+
+    const submission = await Submission.findById(id);
+
+    submission.comments.push(value);
+
+    const updatedSubmission = await Submission.findByIdAndUpdate(id, submission, { new: true });
+
+    res.json(updatedSubmission);
+};
+
 export default router;

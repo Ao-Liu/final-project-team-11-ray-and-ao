@@ -3,22 +3,21 @@ import { Typography, TextField, Button } from '@material-ui/core/';
 import { useDispatch } from 'react-redux';
 
 import { commentPost } from '../../actions/posts';
+import { commentSubmission } from '../../actions/submission';
 import useStyles from './styles';
 
-const CommentSection = ({ post }) => {
+const CommentSection = ({ submission }) => {
   const user = JSON.parse(localStorage.getItem('profile'));
   const [comment, setComment] = useState('');
   const dispatch = useDispatch();
-  const [comments, setComments] = useState(post?.comments);
+  const [comments, setComments] = useState(submission?.comments);
   const classes = useStyles();
   const commentsRef = useRef();
 
   const handleComment = async () => {
-    const newComments = await dispatch(commentPost(`${user?.result?.name}: ${comment}`, post._id));
-
+    const newComments = await dispatch(commentSubmission(`${user?.result?.name}: ${comment}`, submission._id));
     setComment('');
     setComments(newComments);
-
     commentsRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -29,7 +28,7 @@ const CommentSection = ({ post }) => {
           <Typography gutterBottom variant="h6">Comments</Typography>
           {comments?.map((c, i) => (
             <Typography key={i} gutterBottom variant="subtitle1">
-              <strong>{c.split(': ')[0]}</strong>
+              <strong>{c.split(': ')[0]}:</strong>
               {c.split(':')[1]}
             </Typography>
           ))}

@@ -32,7 +32,7 @@ const Subm = () => {
 
   if (isLoading) {
     return (
-      <Paper elevation={6} className={classes.loadingPaper}>
+      <Paper elevation={0} className={classes.loadingPaper}>
         <CircularProgress size="7em" />
       </Paper>
     );
@@ -41,30 +41,30 @@ const Subm = () => {
   // const recommendedPosts = posts.filter(({ _id }) => _id !== submission._id);
 
   return (
-    <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
+    <Paper style={{ padding: '20px', borderRadius: '15px', backgroundColor: "#EFEEFF"}} elevation={0}>
       <div className={classes.card}>
         <div className={classes.section}>
-          <Typography variant="h3" component="h2">{submission.title}</Typography>
+          <Typography variant="h3" component="h2">{submission?.title}</Typography>
           {/* <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{submission.tags.map((tag) => (
             <Link to={`/tags/${tag}`} style={{ textDecoration: 'none', color: '#3f51b5' }}>
               {` #${tag} `}
             </Link>
           ))}
           </Typography> */}
-          <Typography gutterBottom variant="body1" component="p">{submission.message}</Typography>
+          <Typography gutterBottom variant="body1" component="p">{submission?.message}</Typography>
           <Typography variant="h6">
             Created by:
-            <Link to={`/creators/${submission.name}`} style={{ textDecoration: 'none', color: '#3f51b5' }}>
-              {` ${submission.name}`}
+            <Link to={`/submissions?user=${submission?.creator}`} style={{ textDecoration: 'none', color: '#3f51b5' }}>
+              {` ${submission?.creatorName}`}
             </Link>
           </Typography>
-          <Typography variant="body1">{moment(submission.createdAt).fromNow()}</Typography>
+          <Typography variant="body1">{moment(submission?.createdAt).fromNow()}</Typography>
           <Divider style={{ margin: '20px 0' }} />
-          <CommentSection post={submission} />
+          <CommentSection submission={submission} />
           <Divider style={{ margin: '20px 0' }} />
         </div>
         <div className={classes.imageSection}>
-          <img className={classes.media} src={submission.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={submission.title} />
+          <img className={classes.media} src={submission?.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={submission?.title} />
         </div>
       </div>
       {/* {!!recommendedPosts.length && (

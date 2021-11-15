@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Grow, Grid, TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
+import { Typography, Grow, Grid, TextField, Button, Snackbar, Paper, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
 import { useDispatch} from 'react-redux';
 import { useHistory, useLocation, useParams, Link } from 'react-router-dom';
 import FileBase from 'react-file-base64';
@@ -71,6 +71,19 @@ const Recipe = ({contest, recipe}) => {
     return obj;
   }
 
+  const [openSnack, setOpenSnack] = useState(false);
+
+  const handleSnackClick = () => {
+    setOpenSnack(true);
+  };
+
+  const handleSnackClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnack(false);
+  };
+
   const handleCloseViewRules = () => {
     setSubmData({ title: '', message: '', selectedFile: '' });
     setRulesOpen(false);
@@ -90,7 +103,21 @@ const Recipe = ({contest, recipe}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(createSubmission({...submData, creator: user?.result?._id, creatorName: user?.result?.name, contest: contest?._id}, history, contest));
+    if (!user) {
+      return;
+    }
+    if (!submData.selectedFile){
+      handleSnackClick();
+      return;
+    }
+    if (!submData.title){
+      handleSnackClick();
+      return;
+    }
+    user.result.attended = (parseInt(user.result.attended) + 1).toString();
+    user.result.possession = (parseInt(user.result.possession) + 100).toString();
+    localStorage.setItem('profile', JSON.stringify(user));
+    dispatch(createSubmission({...submData, creator: user?.result?._id, creatorName: user?.result?.name, contest: contest?._id}, history, contest, user.result));
     handleCloseAddSubmission();
   };
 
@@ -98,6 +125,13 @@ const Recipe = ({contest, recipe}) => {
     <Grow in>
         <Paper style={{ padding: '2vh 3vh 8vh 3vh', borderRadius: '15px', backgroundColor:'#DFF9FF', height: '74vh'}} elevation={0}>
             <Grid>
+              <Snackbar
+                open={openSnack}
+                autoHideDuration={6000}
+                onClose={handleSnackClose}
+                message="You need to include an image and title!"
+                action={null}
+              />
               <Dialog
                 open={rulesOpen}
                 onClose={handleCloseViewRules}

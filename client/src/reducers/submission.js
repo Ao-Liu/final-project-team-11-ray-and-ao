@@ -21,6 +21,16 @@ export default (state = { isLoading: true, submissions: []}, action) => {
       return { ...state, submissions: state.submissions.map((submissions) => (submissions._id === action.payload._id ? action.payload : submissions)) };
     case 'DELETE_SUBMISSION':
       return { ...state, submissions: state.submissions.filter((submissions) => submissions._id !== action.payload) };
+    case 'COMMENT_SUBMISSION':
+      return {
+        ...state,
+        submissions: state.submissions.map((submission) => {
+          if (submission._id === +action.payload._id) {
+            return action.payload;
+          }
+          return submission;
+        }),
+      };
     default:
       return state;
   }

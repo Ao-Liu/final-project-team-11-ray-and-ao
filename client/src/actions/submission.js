@@ -1,12 +1,13 @@
 import { START_LOADING, END_LOADING, FETCH_SUBMISSION_BY_ID } from '../constants/actionTypes';
 import * as api from '../api/index.js';
 
-export const createSubmission = (submission, history, contest) => async (dispatch) => {
+export const createSubmission = (submission, history, contest, user) => async (dispatch) => {
     try {
       dispatch({ type: START_LOADING });
       const { data } = await api.createSubmission(submission);
       contest.submissions = [...contest.submissions, data._id];
-      const { data2 } = await api.updateContest(contest._id, contest);
+      await api.updateContest(contest._id, contest);
+      await api.updateUser(user._id, user);
       dispatch({ type: 'CREATE_SUBMISSION', payload: data});
       dispatch({ type: "REFRESH" });
     } catch (error) { 
@@ -66,3 +67,13 @@ export const getSubmissionById = (id) => async (dispatch) => {
     console.log(error);
   }
 }
+
+export const commentSubmission = (value, id) => async (dispatch) => {
+  try {
+    const { data } = await api.commentSubmission(value, id);
+    dispatch({ type: 'COMMENT_SUBMISSION', payload: data });
+    return data.comments;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -9,6 +9,7 @@ const submissionSchema = mongoose.Schema({
         type: Date,
         default: new Date(),
     },
+    comments: { type: [String], default: [] },
     contest: String,
     message: String
 })

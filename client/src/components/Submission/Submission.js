@@ -1,13 +1,7 @@
 import React from 'react';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase } from '@material-ui/core/';
 import DeleteIcon from '@material-ui/icons/Delete';
-<<<<<<< HEAD
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
-import { deleteSubmission, getSubmissionById } from '../../actions/submission';
-=======
 import { deleteSubmission } from '../../actions/submission';
->>>>>>> 5f4bb88ace5f70987ea63900f2895d00d50bf285
 import { useDispatch } from 'react-redux';
 import { useHistory , Link } from 'react-router-dom';
 
