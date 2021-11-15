@@ -115,6 +115,10 @@ const Recipe = ({contest, recipe}) => {
     setSubmissionOpen(true);
   }
 
+  const handleRedierctToHome = () => {
+    document.location.href="/home";
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) {
@@ -132,7 +136,7 @@ const Recipe = ({contest, recipe}) => {
     user.result.attended = (parseInt(user.result.attended) + 1).toString();
     user.result.possession = (parseInt(user.result.possession) + 100).toString();
     localStorage.setItem('profile', JSON.stringify(user));
-    dispatch(createSubmission({...submData, creator: user?.result?._id, creatorName: user?.result?.name, contest: contest?._id}, history, contest, user.result));
+    dispatch(createSubmission({...submData, creator: user?.result?._id, creatorName: user?.result?.name, contest: contest?._id}, history, contest, user.result, handleRedierctToHome));
     handleCloseAddSubmission();
   };
 

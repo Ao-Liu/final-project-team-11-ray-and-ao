@@ -1,7 +1,7 @@
 import { START_LOADING, END_LOADING, FETCH_SUBMISSION_BY_ID } from '../constants/actionTypes';
 import * as api from '../api/index.js';
 
-export const createSubmission = (submission, history, contest, user) => async (dispatch) => {
+export const createSubmission = (submission, history, contest, user, redirect) => async (dispatch) => {
     try {
       dispatch({ type: START_LOADING });
       const { data } = await api.createSubmission(submission);
@@ -10,8 +10,10 @@ export const createSubmission = (submission, history, contest, user) => async (d
       await api.updateUser(user._id, user);
       dispatch({ type: 'CREATE_SUBMISSION', payload: data});
       dispatch({ type: "REFRESH" });
+      redirect();
     } catch (error) { 
       console.log(error);
+      redirect();
     }
 }
 
