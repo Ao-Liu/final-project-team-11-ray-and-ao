@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, Paper, Grid, Typography, Container } from '@material-ui/core';
+import { Button, Paper, Grid, Typography, Container, Snackbar } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 
@@ -15,9 +15,21 @@ const initialState = { firstName: '', lastName: '', email: '', password: '', con
 const SignUp = () => {
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
+  const [signInError, setSignInError] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
+  
+  const handleSnackClick = () => {
+    setSignInError(true);
+  };
+
+  const handleSnackClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSignInError(false);
+  };
 
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
@@ -30,11 +42,10 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (isSignup) {
-      dispatch(signup(form, history));
+      dispatch(signup(form, history, handleSnackClick));
     } else {
-      dispatch(signin(form, history));
+      dispatch(signin(form, history, handleSnackClick));
     }
   };
 
@@ -44,7 +55,6 @@ const SignUp = () => {
 
     try {
       dispatch({ type: AUTH, data: { result, token } });
-
       history.push('/');
     } catch (error) {
       console.log(error);
@@ -57,6 +67,13 @@ const SignUp = () => {
 
   return (
     <Container component="main" maxWidth="sm">
+      <Snackbar
+                open={signInError}
+                autoHideDuration={6000}
+                onClose={handleSnackClose}
+                message="Wrong credentials"
+                action={null}
+              />
       <Paper style={{ padding:"60px", borderRadius: '15px', backgroundColor:'#E7FFD4'}} className={classes.paper} elevation={0}>
         <Typography style={{fontWeight: 600, marginBottom:"20px"}} component="h1" variant="h3">{ isSignup ? 'Sign up' : 'Sign in' }</Typography>
         <form className={classes.form} onSubmit={handleSubmit}>

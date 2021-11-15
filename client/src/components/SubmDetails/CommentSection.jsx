@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Typography, TextField, Button } from '@material-ui/core/';
+import { Typography, TextField, Button, Snackbar } from '@material-ui/core/';
 import { useDispatch } from 'react-redux';
 
 import { commentPost } from '../../actions/posts';
@@ -13,8 +13,24 @@ const CommentSection = ({ submission }) => {
   const [comments, setComments] = useState(submission?.comments);
   const classes = useStyles();
   const commentsRef = useRef();
+  const [openSnack, setOpenSnack] = useState(false);
+
+  const handleSnackClick = () => {
+    setOpenSnack(true);
+  };
+
+  const handleSnackClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnack(false);
+  };
 
   const handleComment = async () => {
+    if (!user) {
+      handleSnackClick();
+      return;
+    }
     const newComments = await dispatch(commentSubmission(`${user?.result?.name}: ${comment}`, submission._id));
     setComment('');
     setComments(newComments);
@@ -23,6 +39,13 @@ const CommentSection = ({ submission }) => {
 
   return (
     <div>
+      <Snackbar
+                open={openSnack}
+                autoHideDuration={6000}
+                onClose={handleSnackClose}
+                message="Please Login First"
+                action={null}
+              />
       <div className={classes.commentsOuterContainer}>
         <div className={classes.commentsInnerContainer}>
           <Typography gutterBottom variant="h6">Comments</Typography>
