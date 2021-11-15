@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Toolbar, Typography, Container, Grow, Grid, AppBar, TextField, Button, Paper, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import { Typography, Grow, Grid, Button, Paper, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation, Link } from 'react-router-dom';
-import ChipInput from 'material-ui-chip-input';
 import medal from '../../images/medal.png';
-
-import { getPostsBySearch } from '../../actions/posts'; 
-import { getContest, getRecentContests, getRecipe } from '../../actions/contest'; 
-import Posts from '../Posts/Posts';
-import Form from '../Form/Form';
-import Pagination from '../Pagination';
+import { getRecentContests, getRecipe } from '../../actions/contest'; 
 import useStyles from './styles';
 
 function useQuery() {
@@ -27,19 +21,14 @@ function sleep(milliseconds) {
 const Home = () => {
   const classes = useStyles();
   const query = useQuery();
-  const page = query.get('page') || 1;
-  const searchQuery = query.get('searchQuery');
   const {contests, isLoading, recipes} = useSelector((state) => state.contests);
   const [ucStartDate, setUcStartDate] = useState([]);
-  const [currentId, setCurrentId] = useState(0);
   const [started, setStarted] = useState(false);
-  const [search, setSearch] = useState('');
   const [tags, setTags] = useState([]);
   const [rulesOpen, setRulesOpen] = React.useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
   const curUser = JSON.parse(localStorage.getItem('profile'));
-  console.log(`user ${curUser}`);
   const [user, setUser] = useState(curUser);
 
   useEffect(() => {
@@ -72,7 +61,7 @@ const Home = () => {
   }
  
   const updateContestInfo = () => {
-    console.log(`recipes: ${JSON.stringify(recipes[0])}`);
+    // console.log(`recipes: ${JSON.stringify(recipes[0])}`);
   }
 
   const handleClickViewRules = () => {

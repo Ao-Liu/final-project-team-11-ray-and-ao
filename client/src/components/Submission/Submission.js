@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase } from '@material-ui/core/';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
+<<<<<<< HEAD
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import { deleteSubmission, getSubmissionById } from '../../actions/submission';
+=======
+import { deleteSubmission } from '../../actions/submission';
+>>>>>>> 5f4bb88ace5f70987ea63900f2895d00d50bf285
 import { useDispatch } from 'react-redux';
-import moment from 'moment';
 import { useHistory , Link } from 'react-router-dom';
 
 import useStyles from './styles';
@@ -38,7 +40,6 @@ const Submission = ({ submission }) => {
         <div className={classes.overlay}>
           <Typography variant="h4">{submission?.creatorName}</Typography>
           <Typography variant="body2">{date?.getFullYear()}/{date?.getMonth()}/{date?.getDate()} {date?.toTimeString().split(' ')[0]}</Typography>
-          {/* {moment(post.createdAt).fromNow()} */}
         </div>
         <Typography className={classes.title} gutterBottom variant="h5" component="h2">{submission?.title}</Typography>
         <CardContent>

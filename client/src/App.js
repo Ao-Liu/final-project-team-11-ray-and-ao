@@ -1,4 +1,4 @@
-import React, { Profiler } from 'react';
+import React from 'react';
 import { Container } from '@material-ui/core';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
@@ -11,7 +11,6 @@ import Profile from './components/Profile/Profile';
 import Auth from './components/Auth/Auth';
 import CreatorOrTag from './components/CreatorOrTag/CreatorOrTag';
 import Contest from './components/Contest/Contest';
-import Submission from './components/Submission/Submission.js';
 import Submissions from './components/Submission/Submissions.js';
 
 const App = () => {

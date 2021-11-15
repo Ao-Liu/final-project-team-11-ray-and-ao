@@ -1,34 +1,13 @@
 import React, { useState } from 'react';
-import { Toolbar, Typography, Container, Grow, Grid, AppBar, TextField, Button, Paper} from '@material-ui/core';
+import { Typography, Grow, Grid, Button, Paper} from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
-import ChipInput from 'material-ui-chip-input';
-import userAvatar from '../../images/user.png';
 import { Check } from '@material-ui/icons';
-import { getPostsBySearch } from '../../actions/posts';
 import { subscribePro } from '../../actions/auth'; 
-import Form from '../Form/Form';
-import Pagination from '../Pagination';
-import useStyles from './styles';
-
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
 const Pro = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
-  const classes = useStyles();
-  const query = useQuery();
-  const page = query.get('page') || 1;
-  const searchQuery = query.get('searchQuery');
-
-  const [currentId, setCurrentId] = useState(0);
   let tmp = user?.result?.isPro === "true" ? true : false
   const [isPro, setIsPro] = useState(tmp)
   const dispatch = useDispatch();
-
-  const [search, setSearch] = useState('');
-  const [tags, setTags] = useState([]);
-  const history = useHistory();
 
   const handleSubscribe = () => {
     user.result.isPro = "true";
@@ -36,10 +15,6 @@ const Pro = () => {
     localStorage.setItem('profile', JSON.stringify(user));
     dispatch(subscribePro(user.result));
   }
-
-  const handleAddChip = (tag) => setTags([...tags, tag]);
-
-  const handleDeleteChip = (chipToDelete) => setTags(tags.filter((tag) => tag !== chipToDelete));
 
   return (
     <Grow in>

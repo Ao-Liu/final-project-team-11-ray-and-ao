@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
-import { Toolbar, Typography, Container, Grow, Grid, AppBar, TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
-import { useDispatch,useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { Typography, Grow, Grid, TextField, Button, Paper, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
+import { useDispatch} from 'react-redux';
 import { useHistory, useLocation, useParams, Link } from 'react-router-dom';
-import ChipInput from 'material-ui-chip-input';
-import userAvatar from '../../images/user.png';
 import FileBase from 'react-file-base64';
-
-import Form from '../Form/Form';
-import Pagination from '../Pagination';
 import useStyles from './styles';
 import { createSubmission } from '../../actions/submission';
 
@@ -27,31 +22,24 @@ function sleep(milliseconds) {
 const Recipe = ({contest, recipe}) => {
   const user = JSON.parse(localStorage.getItem('profile'));
   const classes = useStyles();
-  const query = useQuery();
-  const page = query.get('page') || 1;
-  const searchQuery = query.get('searchQuery');
-  const [currentId, setCurrentId] = useState(0);
   const dispatch = useDispatch();
-  const [search, setSearch] = useState('');
-  const [tags, setTags] = useState([]);
   const history = useHistory();
   const [submData, setSubmData] = useState({ title: '', message: '', selectedFile: '' });
   const [rulesOpen, setRulesOpen] = useState(false);
   const [submissionOpen, setSubmissionOpen] = useState(false);
   const [ended, setEnded] = useState(false);
-  const [titleText, setTitleText] = useState("");
-  const [descriptionText, setDescriptionText] = useState("");
-  const [titleErrorText, setTitleErrorText] = useState("");
+
+  useEffect(() => {
+    setInterval(handleUpdateTime, 1000)
+  }, []);
 
   const changeTitleValue = (e) => {
     const value = e.target.value;
-    console.log(value);
     setSubmData({...submData, title: value});
   }
 
   const changeDescriptionValue = (e) => {
     const value = e.target.value;
-    console.log(value);
     setSubmData({...submData, message: value});
   }
   const { id } = useParams();
@@ -84,7 +72,7 @@ const Recipe = ({contest, recipe}) => {
   }
 
   const handleCloseViewRules = () => {
-    console.log(submData);
+    setSubmData({ title: '', message: '', selectedFile: '' });
     setRulesOpen(false);
   }
 
@@ -111,6 +99,45 @@ const Recipe = ({contest, recipe}) => {
         <Paper style={{ padding: '2vh 3vh 8vh 3vh', borderRadius: '15px', backgroundColor:'#DFF9FF', height: '74vh'}} elevation={0}>
             <Grid>
               <Dialog
+                open={rulesOpen}
+                onClose={handleCloseViewRules}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">
+                  {"Ingredients"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    <Grid container style={{ padding:'20px' }}>
+                      <Grid item md={8}>
+                        <Grid container>
+                          {recipe?.ingredients?.map((ing, key) => (
+                            <Grid item md={12} key={key} >
+                            <Typography component={'span'} display="inline" style={{ fontWeight: 400, fontSize:"16px"}} variant="h5" component="h4">
+                              {ing}
+                            </Typography>
+                            </Grid>
+                          ))}
+                        </Grid>
+                      </Grid>
+                      <Grid item md={4}>
+                      <Grid container>
+                          {recipe?.ingMeasures?.map((ing, key) => (
+                            <Grid item md={12} key={key} >
+                              <Typography component={'span'} display="inline" key={key} style={{ fontWeight: 400, fontSize:"16px"}} variant="h5" component="h4">{ing}</Typography>
+                            </Grid>
+                          ))}
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleCloseViewRules} autoFocus> Close </Button>
+                </DialogActions>
+              </Dialog>
+              <Dialog
                 open={submissionOpen}
                 onClose={handleCloseAddSubmission}>
                 <DialogTitle id="alert-dialog-title">
@@ -134,10 +161,13 @@ const Recipe = ({contest, recipe}) => {
                     label="Description"
                     type="text"
                     fullWidth
+                    multiline
+                    rows={3}
                     variant="standard"
                     onChange={e => changeDescriptionValue(e)}
+                    style={{marginBottom: "40px"}} 
                   />
-                  <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setSubmData({ ...submData, selectedFile: base64 })} /></div>
+                  <FileBase type="file" multiple={false} onDone={({ base64 }) => setSubmData({ ...submData, selectedFile: base64 })} />
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleCloseAddSubmission} autoFocus> Close </Button>
@@ -162,52 +192,9 @@ const Recipe = ({contest, recipe}) => {
                   <Typography style={{ fontWeight: 600, textAlign:"center"}} variant="h4" component="h4">{recipe?.fromArea}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} md={5}>
-                  <div style={{display:'none'}}>{setInterval(handleUpdateTime, 1000)}</div>
                   {ended ? <Typography style={{ fontWeight: 600, textAlign:"right"}} variant="h3" component="h4">Contest Ended</Typography>
                   : <Typography style={{ fontWeight: 600, textAlign:"right"}} variant="h3" component="h4">{ucStartDate?.h}h {ucStartDate?.m}m {ucStartDate?.s}s</Typography>}
                 </Grid>
-            </Grid>
-
-            <Grid>
-              <Dialog
-                open={rulesOpen}
-                onClose={handleCloseViewRules}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-              >
-                <DialogTitle id="alert-dialog-title">
-                  {"Ingredients"}
-                </DialogTitle>
-                <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    <Grid container style={{ padding:'20px' }}>
-                      <Grid item md={8}>
-                        <Grid container>
-                          {recipe?.ingredients?.map((ing, key) => (
-                            <Grid item md={12}>
-                            <Typography display="inline" key={key} style={{ fontWeight: 400, fontSize:"16px"}} variant="h5" component="h4">
-                              {ing}
-                            </Typography>
-                            </Grid>
-                          ))}
-                        </Grid>
-                      </Grid>
-                      <Grid item md={4}>
-                      <Grid container>
-                          {recipe?.ingMeasures?.map((ing, key) => (
-                            <Grid item md={12}>
-                              <Typography display="inline" key={key} style={{ fontWeight: 400, fontSize:"16px"}} variant="h5" component="h4">{ing}</Typography>
-                            </Grid>
-                          ))}
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleCloseViewRules} autoFocus> Close </Button>
-                </DialogActions>
-              </Dialog>
             </Grid>
             <Grid container direction="row">
               <Grid item sm={12} md={3}>
