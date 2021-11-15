@@ -24,6 +24,10 @@ This web application is designed for all cooking enthusiasts or speedrun lovers 
     Server: 
     $ cd server/
     $ npm i && npm start
+    
+    Build Frontend: 
+    $ cd client/
+    $ npm run build
 
 ## Deploying
    We deployed the frontend to Netlify, and backend to Heroku
