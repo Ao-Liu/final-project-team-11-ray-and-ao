@@ -17,15 +17,15 @@ This web application is designed for all cooking enthusiasts or speedrun lovers 
 
 
 ### Running Locally
-Client: 
+    Client: 
     $ cd client/
     $ npm i && npm start
     
-Server: 
+    Server: 
     $ cd server/
     $ npm i && npm start
     
-Build Frontend: 
+    Build Frontend: 
     $ cd client/
     $ npm run build
 
