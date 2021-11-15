@@ -84,6 +84,20 @@ const Recipe = ({contest, recipe}) => {
     setOpenSnack(false);
   };
 
+  const [openSnack2, setOpenSnack2] = useState(false);
+
+  const handleSnack2Click = () => {
+    setOpenSnack2(true);
+  };
+
+  const handleSnack2Close = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnack2(false);
+  };
+
+
   const handleCloseViewRules = () => {
     setSubmData({ title: '', message: '', selectedFile: '' });
     setRulesOpen(false);
@@ -104,6 +118,7 @@ const Recipe = ({contest, recipe}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) {
+      handleSnack2Click();
       return;
     }
     if (!submData.selectedFile){
@@ -130,6 +145,13 @@ const Recipe = ({contest, recipe}) => {
                 autoHideDuration={6000}
                 onClose={handleSnackClose}
                 message="You need to include an image and title!"
+                action={null}
+              />
+              <Snackbar
+                open={openSnack2}
+                autoHideDuration={6000}
+                onClose={handleSnack2Close}
+                message="Please Login First!"
                 action={null}
               />
               <Dialog

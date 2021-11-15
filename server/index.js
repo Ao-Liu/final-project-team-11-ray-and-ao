@@ -20,6 +20,9 @@ app.use("/user", userRouter);
 app.use("/", contestRouter);
 app.use("/submissions", submissionRouter);
 
+app.get("/", (req, res) => {
+  res.send("Recipe Run Backend");
+})
 const CONNECTION_URL = 'mongodb+srv://aoliu:Ao990818@cluster0.adlix.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 const PORT = process.env.PORT|| 5000;
 
