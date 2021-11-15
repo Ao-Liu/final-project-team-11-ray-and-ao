@@ -37,6 +37,7 @@ const Subm = () => {
       </Paper>
     );
   }
+  let date = new Date(submission?.createdAt);
 
   // const recommendedPosts = posts.filter(({ _id }) => _id !== submission._id);
 
@@ -58,7 +59,7 @@ const Subm = () => {
               {` ${submission?.creatorName}`}
             </Link>
           </Typography>
-          <Typography variant="body1">{moment(submission?.createdAt).fromNow()}</Typography>
+          <Typography variant="body1">{date?.getFullYear()}/{date?.getMonth()}/{date?.getDate()} {date?.toTimeString().split(' ')[0]}</Typography>
           <Divider style={{ margin: '20px 0' }} />
           <CommentSection submission={submission} />
           <Divider style={{ margin: '20px 0' }} />

@@ -29,6 +29,12 @@ const Recipe = ({contest, recipe}) => {
   const [rulesOpen, setRulesOpen] = useState(false);
   const [submissionOpen, setSubmissionOpen] = useState(false);
   const [ended, setEnded] = useState(false);
+  let userId = 0;
+  if (user?.result?.googleId) {
+    userId = user?.result?.googleId
+  } else if (user?.result?._id) {
+    userId = user?.result?._id
+  }
 
   useEffect(() => {
     setInterval(handleUpdateTime, 1000)
@@ -116,6 +122,11 @@ const Recipe = ({contest, recipe}) => {
     setSubmissionOpen(true);
   }
 
+  const handleRedierctToHome = () => {
+    handleCloseAddSubmission();
+    document.location.href=`/submissions?user=${userId}`;
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) {
@@ -133,8 +144,7 @@ const Recipe = ({contest, recipe}) => {
     user.result.attended = (parseInt(user.result.attended) + 1).toString();
     user.result.possession = (parseInt(user.result.possession) + 100).toString();
     localStorage.setItem('profile', JSON.stringify(user));
-    dispatch(createSubmission({...submData, creator: user?.result?._id, creatorName: user?.result?.name, contest: contest?._id}, history, contest, user.result));
-    handleCloseAddSubmission();
+    dispatch(createSubmission({...submData, creator: user?.result?._id, creatorName: user?.result?.name, contest: contest?._id}, history, contest, user.result, handleRedierctToHome));
   };
 
   return (
