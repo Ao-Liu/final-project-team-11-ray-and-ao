@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Grid, CircularProgress } from '@material-ui/core';
+import { Typography, Grid, CircularProgress, Button } from '@material-ui/core';
+import { useHistory, useLocation, useParams, Link } from 'react-router-dom';
 import useStyles from './styles';
 import { mergeClasses } from "@material-ui/styles";
 
-const Timer = ({date}) => {
+const ActionButton = ({date, cid, handleClickAddSubmission}) => {
   const classes = useStyles();
+
   const calculateTimeLeft = () => {
     const difference = +new Date(date) - +new Date();
     let timeLeft = {};
@@ -26,26 +28,22 @@ const Timer = ({date}) => {
     }, 500);
   });
 
-  const timerComponents = [];
+  let cnt = 0;
   Object.keys(timeLeft).forEach((interval) => {
-    timerComponents.push(
-      <Typography variant="h1" component="h2" className={classes.timer}>
-        {timeLeft[interval]}{interval}&nbsp;
-      </Typography>
-    );
+    cnt++;
   });
-  if (timerComponents.length < 3) {
-    timerComponents.push(
-        <Typography variant="h1" component="h2" className={classes.timer}>
-          0s&nbsp;
-        </Typography>
-      );
-  }
+
   return (
     <div>
-      {timerComponents.length > 1 ? <Grid container justifyContent="center" alignItems="center">{timerComponents}</Grid> : <CircularProgress/>}
+      {cnt == 0 ? 
+        <Button variant="contained" component={Link} to={`/submissions?contest=${cid}`} size="large" color="primary" disableElevation style={{ backgroundColor: '#173A56', margin: '10px 20px' }}>
+          View All Submissions
+        </Button> : 
+        <Button variant="contained" size="large" color="primary" onClick={handleClickAddSubmission} disableElevation style={{ backgroundColor: '#173A56', margin: '10px 20px' }}>
+          Add Submission
+        </Button>}
     </div>
   );
 }
 
-export default Timer;
+export default ActionButton;
